@@ -7,8 +7,7 @@
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
-  <script src="https://unpkg.com/three@0.155.0/build/three.min.js"></script>
-  <script src="https://unpkg.com/qrcode-generator@1.4.4/qrcode.js"></script>
+    <script src="https://unpkg.com/qrcode-generator@1.4.4/qrcode.js"></script>
   <style>
 /* ── RESET & BASE ── */
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
@@ -564,44 +563,44 @@ body{font-family:var(--font-body);background:#f0ece4;color:var(--gray-800);line-
 /* ══════════════════════════════════════════
    ARIA ASSISTANT
 ══════════════════════════════════════════ */
-.aria-btn{position:fixed;bottom:28px;right:28px;z-index:9999;width:58px;height:58px;border-radius:50%;background:#0c1340;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:24px;box-shadow:0 6px 28px rgba(12,19,64,0.5);transition:transform 0.2s cubic-bezier(0.22,1,0.36,1),box-shadow 0.2s}
-.aria-btn:hover{transform:scale(1.1);box-shadow:0 10px 36px rgba(12,19,64,0.6)}
+.aria-btn{position:fixed;bottom:28px;right:28px;z-index:9999;width:58px;height:58px;border-radius:50%;background:#13213A;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:24px;box-shadow:0 6px 28px rgba(19,33,58,0.4);transition:transform 0.2s cubic-bezier(0.22,1,0.36,1),box-shadow 0.2s}
+.aria-btn:hover{background:#EE5A33;transform:scale(1.1);box-shadow:0 10px 36px rgba(238,90,51,0.4)}
 .aria-notif{position:absolute;top:2px;right:2px;width:17px;height:17px;background:#10b981;border-radius:50%;border:2px solid #fff;font-size:9px;color:#fff;font-weight:800;display:flex;align-items:center;justify-content:center}
-.aria-panel{position:fixed;bottom:100px;right:28px;z-index:9998;width:368px;max-height:570px;background:#fff;border-radius:20px;box-shadow:0 20px 70px rgba(0,0,0,0.2);display:flex;flex-direction:column;overflow:hidden;transform:scale(0.9) translateY(20px);opacity:0;pointer-events:none;transition:transform 0.32s cubic-bezier(0.22,1,0.36,1),opacity 0.28s ease}
+.aria-panel{position:fixed;bottom:100px;right:28px;z-index:9998;width:368px;max-height:570px;background:#fff;border-radius:20px;box-shadow:0 20px 70px rgba(19,33,58,0.18);border:1px solid #DCE3EB;display:flex;flex-direction:column;overflow:hidden;transform:scale(0.9) translateY(20px);opacity:0;pointer-events:none;transition:transform 0.32s cubic-bezier(0.22,1,0.36,1),opacity 0.28s ease}
 .aria-panel.open{transform:scale(1) translateY(0);opacity:1;pointer-events:all}
-.aria-head{background:#0c1340;padding:14px 16px;display:flex;align-items:center;gap:10px;flex-shrink:0}
-.aria-avatar{width:36px;height:36px;border-radius:50%;background:rgba(245,158,11,0.2);border:1.5px solid rgba(245,158,11,0.4);display:flex;align-items:center;justify-content:center;font-size:17px;flex-shrink:0}
-.aria-head-name{font-size:13px;font-weight:700;color:#fff;line-height:1}
-.aria-head-sub{font-size:10px;color:rgba(255,255,255,0.45);margin-top:3px}
+.aria-head{background:linear-gradient(135deg,#13213A 0%,#1e3358 100%);padding:14px 16px;display:flex;align-items:center;gap:10px;flex-shrink:0}
+.aria-avatar{width:36px;height:36px;border-radius:50%;background:rgba(238,90,51,0.2);border:1.5px solid rgba(238,90,51,0.5);display:flex;align-items:center;justify-content:center;font-size:17px;flex-shrink:0}
+.aria-head-name{font-size:13px;font-weight:700;color:#fff;line-height:1;font-family:'IBM Plex Mono',monospace}
+.aria-head-sub{font-size:10px;color:rgba(255,255,255,0.5);margin-top:3px}
 .aria-online{width:8px;height:8px;border-radius:50%;background:#10b981;flex-shrink:0}
 .aria-close{background:none;border:none;color:rgba(255,255,255,0.35);cursor:pointer;font-size:20px;line-height:1;padding:0;margin-left:auto;transition:color 0.15s}
 .aria-close:hover{color:#fff}
 .aria-msgs{flex:1;overflow-y:auto;padding:14px;display:flex;flex-direction:column;gap:10px;scroll-behavior:smooth}
 .aria-msgs::-webkit-scrollbar{width:4px}
-.aria-msgs::-webkit-scrollbar-thumb{background:#e2e8f0;border-radius:2px}
+.aria-msgs::-webkit-scrollbar-thumb{background:#DCE3EB;border-radius:2px}
 .aria-msg{display:flex;gap:8px;align-items:flex-start;animation:fadeUp2 0.2s ease}
 .aria-msg.user-msg{flex-direction:row-reverse}
 .aria-av{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px;font-size:12px}
-.aria-av.ai-av{background:#0c1340;color:#f59e0b}
-.aria-av.user-av{background:#e2e8f0;color:#0c1340;font-weight:700;font-size:10px}
-.aria-bubble{max-width:84%;padding:10px 13px;border-radius:14px;font-size:13px;line-height:1.6;color:#1e293b}
-.aria-bubble.ai-bub{background:#f1f5f9;border-radius:4px 14px 14px 14px}
-.aria-bubble.user-bub{background:#0c1340;color:#fff;border-radius:14px 4px 14px 14px}
+.aria-av.ai-av{background:#13213A;color:#EE5A33}
+.aria-av.user-av{background:#EEF2F7;color:#13213A;font-weight:700;font-size:10px}
+.aria-bubble{max-width:84%;padding:10px 13px;border-radius:14px;font-size:13px;line-height:1.6;color:#13213A}
+.aria-bubble.ai-bub{background:#F7F9FB;border:1px solid #EEF2F7;border-radius:4px 14px 14px 14px}
+.aria-bubble.user-bub{background:#13213A;color:#fff;border-radius:14px 4px 14px 14px}
 .aria-bubble strong{font-weight:700}
-.aria-tip{margin-top:8px;padding:7px 10px;background:rgba(245,158,11,0.1);border-left:2px solid #f59e0b;border-radius:0 6px 6px 0;font-size:11px;color:#92400e}
+.aria-tip{margin-top:8px;padding:7px 10px;background:rgba(238,90,51,0.08);border-left:2px solid #EE5A33;border-radius:0 6px 6px 0;font-size:11px;color:#8A2A00}
 .aria-chips{display:flex;flex-wrap:wrap;gap:5px;margin-top:8px}
-.aria-chip{padding:4px 10px;background:#fff;border:1px solid #e2e8f0;border-radius:999px;font-size:11px;color:#475569;cursor:pointer;transition:all 0.15s;white-space:nowrap}
-.aria-chip:hover{background:#0c1340;color:#fff;border-color:#0c1340}
+.aria-chip{padding:4px 10px;background:#fff;border:1px solid #DCE3EB;border-radius:999px;font-size:11px;color:#3D4A5C;cursor:pointer;transition:all 0.15s;white-space:nowrap}
+.aria-chip:hover{background:#13213A;color:#fff;border-color:#13213A}
 .aria-typing-wrap{display:flex;gap:4px;align-items:center;padding:2px 0}
-.aria-dot{width:6px;height:6px;border-radius:50%;background:#94a3b8;animation:bounce 1.2s infinite}
+.aria-dot{width:6px;height:6px;border-radius:50%;background:#CBD4DF;animation:bounce 1.2s infinite}
 .aria-dot:nth-child(2){animation-delay:0.2s}
 .aria-dot:nth-child(3){animation-delay:0.4s}
-.aria-foot{padding:10px 12px;border-top:1px solid #f1f5f9;display:flex;gap:8px;align-items:center;flex-shrink:0}
-.aria-input{flex:1;border:1.5px solid #e2e8f0;border-radius:10px;padding:9px 12px;font-size:13px;color:#1e293b;background:#f8fafc;outline:none;transition:border-color 0.2s,background 0.2s;font-family:var(--font-body)}
-.aria-input:focus{border-color:#0c1340;background:#fff}
-.aria-send{width:36px;height:36px;border-radius:10px;background:#0c1340;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:background 0.15s,transform 0.15s}
-.aria-send:hover{background:#1e3a8a;transform:scale(1.05)}
-.aria-send svg{width:14px;height:14px;fill:none;stroke:#f59e0b;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round}
+.aria-foot{padding:10px 12px;border-top:1px solid #EEF2F7;display:flex;gap:8px;align-items:center;flex-shrink:0}
+.aria-input{flex:1;border:1.5px solid #DCE3EB;border-radius:10px;padding:9px 12px;font-size:13px;color:#13213A;background:#F7F9FB;outline:none;transition:border-color 0.2s,background 0.2s;font-family:'IBM Plex Mono',monospace}
+.aria-input:focus{border-color:#13213A;background:#fff}
+.aria-send{width:36px;height:36px;border-radius:10px;background:#EE5A33;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:background 0.15s,transform 0.15s}
+.aria-send:hover{background:#c44020;transform:scale(1.05)}
+.aria-send svg{width:14px;height:14px;fill:none;stroke:#fff;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round}
 
 @media(max-width:480px){
   .aria-panel{width:calc(100vw - 20px);right:10px;bottom:86px}
@@ -1195,7 +1194,18 @@ body{font-family:'IBM Plex Mono',ui-monospace,monospace!important}
 .nav-new-links a:hover{color:#EE5A33}
 .nav-new-cta{font-size:11px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:#fff;background:#13213A;border-radius:999px;padding:10px 18px;border:none;cursor:pointer;font-family:'IBM Plex Mono',monospace;transition:all 0.2s;white-space:nowrap}
 .nav-new-cta:hover{background:#EE5A33}
-@media(max-width:700px){.nav-new-links{display:none}}
+.nav-hamburger{display:none;background:#13213A;border:none;cursor:pointer;padding:9px 14px;border-radius:999px;color:#fff;font-size:13px;font-weight:700;letter-spacing:0.06em;flex-shrink:0;font-family:'IBM Plex Mono',monospace;transition:background 0.2s}
+.nav-hamburger:hover{background:#EE5A33}
+.nav-mob-close{display:none;position:fixed;top:22px;right:24px;z-index:10001;background:rgba(255,255,255,0.12);border:1px solid rgba(255,255,255,0.2);border-radius:50%;width:40px;height:40px;color:#fff;font-size:20px;cursor:pointer;align-items:center;justify-content:center}
+@media(max-width:700px){
+  .nav-hamburger{display:flex;align-items:center;gap:7px}
+  .nav-new-cta{display:none}
+  .nav-new-links{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(19,33,58,0.97);z-index:10000;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:36px;pointer-events:none;opacity:0;transition:opacity 0.25s}
+  .nav-new-links.mob-open{pointer-events:all;opacity:1}
+  .nav-new-links.mob-open~.nav-mob-close{display:flex}
+  .nav-new-links a{color:#fff;font-size:22px;font-weight:600;font-family:'IBM Plex Mono',monospace;text-decoration:none}
+  .nav-new-links a:hover{color:#EE5A33}
+}
 
 /* ── HERO NEW ── */
 .hero-new{background:#EEF2F7;font-family:'IBM Plex Mono',ui-monospace,monospace;padding:110px 24px 72px;position:relative;overflow:hidden}
@@ -1235,7 +1245,20 @@ body{font-family:'IBM Plex Mono',ui-monospace,monospace!important}
 .hero-hint-btn{display:flex;align-items:center;gap:9px;min-height:46px;padding:0 20px;border-radius:999px;border:1px solid #F8D3C6;background:#FDECE5;color:#13213A;font-size:14px;font-weight:600;cursor:pointer;font-family:'IBM Plex Mono',monospace;box-shadow:0 8px 22px -14px rgba(238,90,51,0.55);animation:hintPulse 2.6s ease-in-out infinite}
 @keyframes hintPulse{0%,100%{transform:translateY(0)}50%{transform:translateY(-3px)}}
 @media(prefers-reduced-motion:reduce){.hero-hint-btn{animation:none}}
-@media(max-width:600px){.hero-new{padding:100px 16px 56px}.hero-form{grid-template-columns:1fr}}
+@media(max-width:600px){
+  .hero-new{padding:100px 16px 56px}
+  .hero-form{grid-template-columns:1fr}
+  .hero-canvas-wrap{aspect-ratio:unset!important;height:260px}
+  #hero-canvas{height:260px}
+  .hero-right{width:100%;align-items:stretch}
+  .hero-route-badge{top:auto!important;left:50%!important;bottom:60px;transform:translateX(-50%);width:auto;min-width:180px;justify-content:center}
+  .hero-hint-btn{font-size:12px;padding:0 14px}
+  .hero-h1{font-size:clamp(36px,9vw,52px)}
+}
+@media(max-width:400px){
+  .hero-canvas-wrap{height:200px}
+  #hero-canvas{height:200px}
+}
 
 /* ── MARQUEE ── */
 .marquee-strip{background:#fff!important;border-top:1px solid #DCE3EB!important;border-bottom:1px solid #DCE3EB!important}
@@ -1276,6 +1299,58 @@ body{font-family:'IBM Plex Mono',ui-monospace,monospace!important}
 /* ── TOOLS ── */
 .tools-section{background:#F7F9FB!important}
 
+/* ── TAB HEROES ── */
+.tab-hero{background:#EEF2F7!important;border:1px solid #DCE3EB!important}
+.tab-hero-title{color:#13213A!important}
+.tab-hero-sub{color:#3D4A5C!important}
+.tab-hero-icon{color:#EE5A33!important}
+.tab-hero-emoji{filter:saturate(1.1)}
+
+/* ── RESULT EXTRA ── */
+.stats-row{background:#F7F9FB!important;border-bottom:1px solid #DCE3EB!important}
+.stat-card{background:#fff!important;border:1px solid #DCE3EB!important}
+.stat-val{color:#13213A!important}
+.stat-lbl{color:#3D4A5C!important}
+.result-sep-bar{background:#EEF2F7!important}
+.result-sep-line{background:repeating-linear-gradient(90deg,#CBD4DF 0,#CBD4DF 6px,transparent 6px,transparent 12px)!important}
+.result-sep-notch-l,.result-sep-notch-r{background:#EEF2F7!important;border-color:#DCE3EB!important}
+.tabs-nav{scrollbar-color:#DCE3EB transparent}
+.tab-btn:hover:not(.active){background:#EEF2F7!important;color:#13213A!important}
+.section-label{color:#EE5A33!important}
+
+/* ── SCROLL REVEAL ── */
+.reveal{opacity:0;transform:translateY(22px);transition:opacity 0.55s ease,transform 0.55s ease}
+.reveal.visible{opacity:1;transform:none}
+
+/* ── HERO SKELETON ── */
+.hero-skeleton{position:absolute;inset:0;border-radius:12px;background:#E0E8F0;overflow:hidden;z-index:1;pointer-events:none}
+.hero-skel-shimmer{position:absolute;inset:0;background:linear-gradient(90deg,transparent 0%,rgba(255,255,255,0.55) 50%,transparent 100%);animation:skelMove 1.4s ease-in-out infinite}
+@keyframes skelMove{0%{transform:translateX(-100%)}100%{transform:translateX(100%)}}
+.hero-skeleton.hidden{display:none}
+
+/* ── DARK MODE TOGGLE ── */
+.nav-theme-btn{background:none;border:1px solid #DCE3EB;border-radius:50%;width:36px;height:36px;cursor:pointer;font-size:15px;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all 0.2s;color:#13213A}
+.nav-theme-btn:hover{background:#EE5A33;border-color:#EE5A33;color:#fff}
+[data-theme="dark"] .nav-new-inner{background:rgba(19,33,58,0.85);border-color:#2a3a5a}
+[data-theme="dark"] .nav-new-logo,[data-theme="dark"] .nav-new-links a{color:#fff}
+[data-theme="dark"] .nav-theme-btn{border-color:#2a3a5a;color:#fff}
+[data-theme="dark"] .hero-new{background:#0d1628}
+[data-theme="dark"] .hero-h1,[data-theme="dark"] .hero-eyebrow,[data-theme="dark"] .hero-bullets{color:#EEF2F7}
+[data-theme="dark"] .hero-form{background:rgba(19,33,58,0.8)}
+[data-theme="dark"] .hero-route-badge{background:rgba(19,33,58,0.9);border-color:#2a3a5a}
+[data-theme="dark"] .hrb-val{color:#EEF2F7}
+
+/* ── SCROLL-TO-TOP ── */
+.scroll-top-btn{position:fixed;bottom:104px;right:28px;z-index:998;width:44px;height:44px;border-radius:50%;background:#13213A;color:#fff;border:none;cursor:pointer;font-size:18px;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 16px rgba(19,33,58,0.3);opacity:0;transform:translateY(16px);transition:opacity 0.3s,transform 0.3s,background 0.2s;pointer-events:none}
+.scroll-top-btn.vis{opacity:1;transform:none;pointer-events:auto}
+.scroll-top-btn:hover{background:#EE5A33}
+
+/* ── SHARE BUTTON ── */
+.share-btn{display:none;align-items:center;gap:6px;padding:8px 14px;border-radius:999px;border:1px solid rgba(255,255,255,0.22);background:rgba(255,255,255,0.1);color:#fff;font-size:12px;font-weight:600;cursor:pointer;font-family:'IBM Plex Mono',monospace;transition:all 0.2s;white-space:nowrap}
+.share-btn.vis{display:flex}
+.share-btn:hover{background:rgba(255,255,255,0.22)}
+.share-btn.copied{background:rgba(16,185,129,0.25);border-color:rgba(16,185,129,0.4)}
+
 </style>
 </head>
 <body>
@@ -1289,12 +1364,14 @@ body{font-family:'IBM Plex Mono',ui-monospace,monospace!important}
       </span>
       TravelEasy
     </a>
+    <button class="nav-theme-btn" id="theme-toggle" aria-label="Toggle dark mode" onclick="(function(){var h=document.documentElement;var isDark=h.getAttribute('data-theme')==='dark';h.setAttribute('data-theme',isDark?'light':'dark');var btn=document.getElementById('theme-toggle');if(btn)btn.textContent=isDark?'🌙':'☀️';try{localStorage.setItem('te-theme',isDark?'light':'dark')}catch(e){}})()">🌙</button>
     <div class="nav-new-links" id="nav-links">
       <a href="#destinations-section">Destinations</a>
       <a href="#results">Visa Guide</a>
       <a href="#tools">Tools</a>
     </div>
     <button class="nav-new-cta" onclick="document.getElementById('results').scrollIntoView({behavior:'smooth'})">Global Pass</button>
+    <button class="nav-hamburger" id="nav-hamburger" aria-label="Open menu" onclick="(function(){var nl=document.getElementById('nav-links');nl.classList.toggle('mob-open');document.getElementById('nav-hamburger').textContent=nl.classList.contains('mob-open')?'✕ Close':'☰ Menu'})()">☰ Menu</button>
   </div>
 </nav>
 
@@ -1357,6 +1434,7 @@ body{font-family:'IBM Plex Mono',ui-monospace,monospace!important}
             <span class="hrb-val accent" id="hero-visa-val">eVISA via VFS</span>
           </div>
         </div>
+        <div id="hero-skeleton" class="hero-skeleton"><div class="hero-skel-shimmer"></div></div>
         <canvas id="hero-canvas" aria-label="3D destination preview"></canvas>
         <div id="hero-no-gl" style="display:none;position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:14px;color:#4A5668">WebGL not available</div>
       </div>
@@ -1394,6 +1472,10 @@ body{font-family:'IBM Plex Mono',ui-monospace,monospace!important}
         </div>
         <span class="visa-badge" id="r-visa-badge">—</span>
         <button class="trip-card-btn" onclick="toggleTripCard()" aria-expanded="false" aria-controls="trip-card">🎫 Trip card</button>
+        <button class="share-btn" id="share-result-btn" aria-label="Copy share link" onclick="shareTrip()">
+          <svg aria-hidden="true" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
+          <span id="share-btn-label">Share</span>
+        </button>
       </div>
       <!-- Stats row (inside chrome) -->
       <div class="stats-row">
@@ -7890,13 +7972,36 @@ function heroInitChips(){
 function heroInit(){
   heroInitChips();
   heroUpdateBadge();
-  // wait for Three.js + qrcode
+  // lazy-load Three.js when hero section enters viewport, then init GL
   var tries=0;
   var go=function(){
-    if(window.THREE&&window.qrcode&&document.getElementById('hero-canvas')){heroInitGL();return;}
-    if(++tries<200)setTimeout(go,50);
+    if(window.THREE&&window.qrcode&&document.getElementById('hero-canvas')){
+      var skel=document.getElementById('hero-skeleton');
+      if(skel)skel.style.display='none';
+      heroInitGL();
+      return;
+    }
+    if(++tries<240)setTimeout(go,50);
   };
-  go();
+  var heroCanvas=document.getElementById('hero-section')||document.getElementById('hero-canvas');
+  if(heroCanvas&&'IntersectionObserver'in window){
+    var _glIO=new IntersectionObserver(function(entries){
+      if(!entries[0].isIntersecting)return;
+      _glIO.disconnect();
+      if(!window.THREE){
+        var s=document.createElement('script');
+        s.src='https://unpkg.com/three@0.155.0/build/three.min.js';
+        s.onload=go;
+        document.head.appendChild(s);
+      } else {go();}
+    },{threshold:0.01});
+    _glIO.observe(heroCanvas);
+  } else {
+    var s=document.createElement('script');
+    s.src='https://unpkg.com/three@0.155.0/build/three.min.js';
+    s.onload=go;
+    document.head.appendChild(s);
+  }
   // nav scroll style
   var nav=document.getElementById('navbar');
   if(nav){
@@ -7911,5 +8016,104 @@ else{heroInit();}
 })();
 </script>
 
+<script>
+/* ── Improvement 2: Scroll reveal ── */
+(function(){
+  if(!('IntersectionObserver'in window))return;
+  function initReveal(){
+    var els=document.querySelectorAll('.dest-card-new,.section-title,.section-sub,.stat-card,.tools-section .info-card');
+    var io=new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if(e.isIntersecting){e.target.classList.add('visible');io.unobserve(e.target);}
+      });
+    },{threshold:0.1,rootMargin:'0px 0px -40px 0px'});
+    els.forEach(function(el){el.classList.add('reveal');io.observe(el);});
+  }
+  if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',initReveal);}
+  else{initReveal();}
+})();
+
+/* ── Improvement 5: Dark mode persist ── */
+(function(){
+  try{
+    var t=localStorage.getItem('te-theme');
+    if(t){
+      document.documentElement.setAttribute('data-theme',t);
+      window.addEventListener('DOMContentLoaded',function(){
+        var btn=document.getElementById('theme-toggle');
+        if(btn)btn.textContent=t==='dark'?'☀️':'🌙';
+      });
+    }
+  }catch(e){}
+})();
+
+/* ── Improvement 6: Scroll-to-top ── */
+(function(){
+  window.addEventListener('scroll',function(){
+    var btn=document.getElementById('scroll-top-btn');
+    if(btn)btn.classList.toggle('vis',window.scrollY>400);
+  },{passive:true});
+})();
+
+/* ── Improvement 10: Share link ── */
+function shareTrip(){
+  var pp=document.getElementById('passport-select');
+  var dp=document.getElementById('dest-select');
+  if(!pp||!dp||!pp.value||!dp.value)return;
+  var hash='#share='+pp.value+'-'+dp.value;
+  var url=(window.location.href.split('#')[0])+hash;
+  var btn=document.getElementById('share-result-btn');
+  var label=document.getElementById('share-btn-label');
+  function copied(){
+    if(btn)btn.classList.add('copied');
+    if(label)label.textContent='Copied!';
+    setTimeout(function(){if(btn)btn.classList.remove('copied');if(label)label.textContent='Share';},2200);
+  }
+  if(navigator.clipboard){navigator.clipboard.writeText(url).then(copied,function(){fallbackCopy(url);copied();});}
+  else{fallbackCopy(url);copied();}
+}
+function fallbackCopy(text){
+  var ta=document.createElement('textarea');
+  ta.value=text;ta.style.position='fixed';ta.style.opacity='0';
+  document.body.appendChild(ta);ta.focus();ta.select();
+  try{document.execCommand('copy');}catch(e){}
+  document.body.removeChild(ta);
+}
+/* show share button + parse hash when trip loads */
+(function(){
+  function maybeShowShare(){
+    var btn=document.getElementById('share-result-btn');
+    var pp=document.getElementById('passport-select');
+    if(btn&&pp&&pp.value)btn.classList.add('vis');
+  }
+  var origPlanTrip=window.planTrip;
+  window.planTrip=function(){
+    if(origPlanTrip)origPlanTrip.apply(this,arguments);
+    setTimeout(maybeShowShare,200);
+  };
+  /* parse share hash */
+  try{
+    var h=window.location.hash.replace('#share=','').replace('#','');
+    if(h&&h.indexOf('-')>-1){
+      var parts=h.split('-');
+      if(parts.length>=2){
+        var pp=parts[0],dp=parts.slice(1).join('-');
+        function tryLoad(){
+          var psel=document.getElementById('passport-select');
+          var dsel=document.getElementById('dest-select');
+          if(psel&&dsel&&psel.options.length>1){
+            psel.value=pp;dsel.value=dp;
+            if(window.planTrip)window.planTrip();
+            document.getElementById('results').scrollIntoView({behavior:'smooth'});
+          } else {setTimeout(tryLoad,300);}
+        }
+        if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',function(){setTimeout(tryLoad,800);});}
+        else{setTimeout(tryLoad,800);}
+      }
+    }
+  }catch(e){}
+})();
+</script>
+<button id="scroll-top-btn" class="scroll-top-btn" aria-label="Back to top" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
 </body>
 </html>
