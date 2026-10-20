@@ -4,9 +4,11 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>TravelEasy</title>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+  <script src="https://unpkg.com/three@0.155.0/build/three.min.js"></script>
+  <script src="https://unpkg.com/qrcode-generator@1.4.4/qrcode.js"></script>
   <style>
 /* ── RESET & BASE ── */
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
@@ -907,8 +909,8 @@ body{font-family:var(--font-body);background:#f0ece4;color:var(--gray-800);line-
    TYPOGRAPHY — departure-board display, ticket mono, readable body
 ══════════════════════════════════════════ */
 :root{
-  --font-display:'Plus Jakarta Sans',system-ui,sans-serif;
-  --font-body:'Plus Jakarta Sans',system-ui,sans-serif;
+  --font-display:'IBM Plex Mono',ui-monospace,monospace;
+  --font-body:'IBM Plex Mono',ui-monospace,monospace;
   --font-mono:'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,monospace;
   --wide:118%;
   --fs-label:11px;--fs-small:13.5px;--fs-body:16px;--fs-lead:17px;
@@ -1166,105 +1168,202 @@ button:focus-visible,a:focus-visible,select:focus-visible,input:focus-visible{ou
 :root[data-theme="dark"] .tl-pill.depart,:root[data-theme="dark"] .seg button[aria-checked="true"]{background:#fbbf24;color:#0b0f22;border-color:#fbbf24}
 :root[data-theme="dark"] .save-status{color:#6ee7b7}
 :root[data-theme="dark"] .leaflet-container{background:#1a2142}
-  </style>
+  
+/* ═══════════════════════════════════════════════════
+   2026 REDESIGN — LIGHT THEME
+═══════════════════════════════════════════════════ */
+:root{
+  --te-bg:#EEF2F7;--te-surface:#FFFFFF;--te-primary:#13213A;
+  --te-secondary:#3D4A5C;--te-tertiary:#4A5668;
+  --te-accent:#EE5A33;--te-accent-light:#FDECE5;--te-accent-border:#F8D3C6;
+  --te-border:#DCE3EB;--te-input-bg:#F7F9FB;
+}
+html,body{background:var(--te-bg)!important;color:var(--te-primary)!important}
+body{font-family:'IBM Plex Mono',ui-monospace,monospace!important}
+/* Hide old hero & navbar */
+.hero{display:none!important}
+.navbar{display:none!important}
+
+/* ── NAV NEW ── */
+.nav-new{position:fixed;top:0;left:0;right:0;z-index:1000;padding:14px 24px;transition:background 0.3s}
+.nav-new.scrolled{background:rgba(238,242,247,0.95);backdrop-filter:blur(20px)}
+.nav-new-inner{max-width:1240px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;background:rgba(255,255,255,0.72);border:1px solid #DCE3EB;border-radius:999px;padding:8px 8px 8px 16px;backdrop-filter:blur(12px)}
+.nav-new-logo{display:flex;align-items:center;gap:10px;text-decoration:none;color:#13213A;font-family:'IBM Plex Mono',monospace;font-weight:700;font-size:18px;letter-spacing:-0.02em}
+.nav-new-logo-icon{width:38px;height:38px;border-radius:50%;background:#13213A;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.nav-new-links{display:flex;align-items:center;gap:24px;font-size:14px;font-weight:500}
+.nav-new-links a{color:#13213A;text-decoration:none;transition:color 0.2s}
+.nav-new-links a:hover{color:#EE5A33}
+.nav-new-cta{font-size:11px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:#fff;background:#13213A;border-radius:999px;padding:10px 18px;border:none;cursor:pointer;font-family:'IBM Plex Mono',monospace;transition:all 0.2s;white-space:nowrap}
+.nav-new-cta:hover{background:#EE5A33}
+@media(max-width:700px){.nav-new-links{display:none}}
+
+/* ── HERO NEW ── */
+.hero-new{background:#EEF2F7;font-family:'IBM Plex Mono',ui-monospace,monospace;padding:110px 24px 72px;position:relative;overflow:hidden}
+.hero-new::before{content:'';position:absolute;right:-220px;top:-180px;width:820px;height:820px;border-radius:50%;border:1px solid #D6DEE8;pointer-events:none;z-index:0}
+.hero-new::after{content:'';position:absolute;right:-80px;top:-40px;width:540px;height:540px;border-radius:50%;border:1px solid #D6DEE8;pointer-events:none;z-index:0}
+.hero-new-inner{max-width:1240px;margin:0 auto;position:relative;z-index:1;display:flex;flex-wrap:wrap;gap:40px 56px;align-items:center}
+.hero-left{flex:999 1 460px;min-width:0;display:flex;flex-direction:column;gap:26px}
+.hero-eyebrow{display:flex;align-items:center;gap:10px;font-size:12px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:#3D4A5C}
+.hero-eyebrow-bar{width:28px;height:2px;background:#EE5A33;flex-shrink:0}
+.hero-h1{margin:0;font-size:clamp(42px,5.8vw,80px);line-height:1;font-weight:700;letter-spacing:-0.05em;color:#13213A}
+.hero-h1-hl{position:relative;display:inline-block;z-index:0}
+.hero-h1-hl::before{content:'';position:absolute;left:-4px;right:-4px;bottom:6px;height:14px;background:#EE5A33;opacity:0.33;z-index:-1;border-radius:3px}
+.hero-bullets{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:10px 22px;font-size:15px;color:#3D4A5C}
+.hero-bullets li{display:flex;align-items:center;gap:8px}
+.hero-bullets li::before{content:'';width:6px;height:6px;border-radius:50%;background:#EE5A33;flex-shrink:0}
+.hero-form{background:#fff;border-radius:26px;padding:16px;box-shadow:0 1px 0 #DCE3EB,0 24px 48px -28px rgba(19,33,58,0.3);display:grid;grid-template-columns:repeat(auto-fit,minmax(168px,1fr));gap:10px;align-items:end}
+.hero-form-field{display:flex;flex-direction:column;gap:7px;font-size:12px;font-weight:600;color:#3D4A5C}
+.hero-form-field select,.hero-form-field input[type=date]{height:52px;border:1px solid #CBD4DF;border-radius:14px;padding:0 13px;font-size:15px;font-weight:500;color:#13213A;background:#F7F9FB;cursor:pointer;font-family:'IBM Plex Mono',monospace;width:100%;box-sizing:border-box;-webkit-appearance:none;appearance:none}
+.hero-form-field select:focus,.hero-form-field input:focus{outline:none;border-color:#13213A;box-shadow:0 0 0 3px rgba(19,33,58,0.09)}
+.hero-plan-btn{height:52px;border:0;border-radius:14px;background:#EE5A33;color:#fff;font-size:16px;font-weight:700;display:flex;align-items:center;justify-content:center;gap:8px;cursor:pointer;font-family:'IBM Plex Mono',monospace;box-shadow:0 12px 28px -14px rgba(238,90,51,0.85);transition:all 0.2s}
+.hero-plan-btn:hover{transform:translateY(-2px);box-shadow:0 20px 36px -14px rgba(238,90,51,0.9)}
+.hero-chips-wrap{display:flex;flex-direction:column;gap:10px}
+.hero-chips-label{font-size:11px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:#3D4A5C}
+.hero-chips-row{display:flex;flex-wrap:wrap;gap:8px}
+.hero-chip{min-height:42px;display:inline-flex;align-items:center;gap:7px;padding:0 14px;border-radius:999px;border:1px solid #CBD4DF;background:#fff;color:#13213A;font-size:13px;font-weight:600;cursor:pointer;font-family:'IBM Plex Mono',monospace;transition:all 0.2s}
+.hero-chip.active,.hero-chip:hover{background:#13213A;color:#fff;border-color:#13213A}
+.hero-chip-dot{width:9px;height:9px;border-radius:50%;box-shadow:0 0 0 1px rgba(19,33,58,0.14);flex-shrink:0}
+.hero-right{flex:1 1 380px;min-width:0;display:flex;flex-direction:column;align-items:center;gap:14px}
+.hero-canvas-wrap{position:relative;width:100%;max-width:580px;aspect-ratio:1/0.92}
+#hero-canvas{width:100%;height:100%;display:block;border-radius:12px}
+.hero-route-badge{position:absolute;left:4%;top:5%;display:flex;align-items:center;gap:12px;background:#fff;border:1px solid #DCE3EB;border-radius:14px;padding:10px 14px;box-shadow:0 12px 28px -18px rgba(19,33,58,0.4);z-index:2}
+.hrb-col{display:flex;flex-direction:column;gap:2px}
+.hrb-label{font-size:10px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:#4A5668}
+.hrb-val{font-size:15px;font-weight:700;color:#13213A}
+.hrb-val.accent{color:#8A2A00}
+.hrb-div{width:1px;align-self:stretch;background:#DCE3EB}
+.hero-hint-btn{display:flex;align-items:center;gap:9px;min-height:46px;padding:0 20px;border-radius:999px;border:1px solid #F8D3C6;background:#FDECE5;color:#13213A;font-size:14px;font-weight:600;cursor:pointer;font-family:'IBM Plex Mono',monospace;box-shadow:0 8px 22px -14px rgba(238,90,51,0.55);animation:hintPulse 2.6s ease-in-out infinite}
+@keyframes hintPulse{0%,100%{transform:translateY(0)}50%{transform:translateY(-3px)}}
+@media(prefers-reduced-motion:reduce){.hero-hint-btn{animation:none}}
+@media(max-width:600px){.hero-new{padding:100px 16px 56px}.hero-form{grid-template-columns:1fr}}
+
+/* ── MARQUEE ── */
+.marquee-strip{background:#fff!important;border-top:1px solid #DCE3EB!important;border-bottom:1px solid #DCE3EB!important}
+.marquee-name{color:#13213A!important}
+
+/* ── MAIN ── */
+.main{background:transparent}
+.section-title{color:#13213A!important}
+
+/* ── RESULT chrome ── */
+.result-banner{background:#13213A!important}
+.result-chrome-wrap{background:#fff!important;border:1px solid #DCE3EB!important;box-shadow:0 4px 28px rgba(19,33,58,0.09)!important}
+.result-main-title,.result-sub-text{color:#fff}
+
+/* ── TABS ── */
+.tab-nav{background:#EEF2F7!important;border-color:#DCE3EB!important}
+.tab-btn{color:#3D4A5C!important;border-color:#DCE3EB!important;background:#fff!important}
+.tab-btn.active{background:#13213A!important;color:#fff!important;border-color:#13213A!important}
+.tab-content{background:#fff!important;border:1px solid #DCE3EB!important}
+
+/* ── CARDS ── */
+.dest-card-new,.info-card,.budget-card,.stay-item{background:#fff!important;border:1px solid #DCE3EB!important;box-shadow:0 2px 8px rgba(19,33,58,0.05)!important}
+.dest-card-new:hover,.info-card:hover,.budget-card:hover{transform:translateY(-3px);border-color:#EE5A33!important;box-shadow:0 8px 24px rgba(238,90,51,0.1)!important}
+.ic-title,.brief-step-title,.tl-step-title{color:#13213A!important}
+.brief-step-desc,.tl-step-sub{color:#3D4A5C!important}
+
+/* ── FOOTER ── */
+.site-footer{background:#13213A!important;color:#fff!important}
+.footer-col h4,.footer-logo{color:#fff!important}
+.footer-link,.footer-desc{color:rgba(255,255,255,0.65)!important}
+.footer-link:hover{color:#EE5A33!important}
+.footer-bottom{background:rgba(0,0,0,0.2)!important;color:rgba(255,255,255,0.5)!important}
+
+/* ── DESTINATIONS ── */
+.destinations-section{background:#EEF2F7!important}
+.bag-tag{background:#fff!important;border:1px solid #DCE3EB!important}
+
+/* ── TOOLS ── */
+.tools-section{background:#F7F9FB!important}
+
+</style>
 </head>
 <body>
 
 <!-- NAVBAR -->
-<nav class="navbar" id="navbar">
-  <div class="nav-inner">
-    <a class="nav-logo" href="#">✈️ TravelEasy</a>
-    <div class="nav-links" id="nav-links">
-      <a href="#hero-section" class="nav-link">Home</a>
-      <a href="#destinations-section" class="nav-link">Destinations</a>
-      <a href="#results" class="nav-link">Visa Guide</a>
-      <a href="#results" class="nav-link">Trip Planner</a>
-      <a href="#tools" class="nav-link">Tools</a>
+<nav class="nav-new" id="navbar">
+  <div class="nav-new-inner">
+    <a class="nav-new-logo" href="#hero-section">
+      <span class="nav-new-logo-icon">
+        <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.8 19.2 16 11l3.5-3.5C21 6 21.5 4 21 3c-1-.5-3 0-4.5 1.5L13 8 4.8 6.2c-.5-.1-.9.1-1.1.5l-.3.5c-.2.5-.1 1 .3 1.3L9 12l-2 3H4l-1 1 3 2 2 3 1-1v-3l3-2 3.5 5.3c.3.4.8.5 1.3.3l.5-.2c.4-.3.6-.7.5-1.2z"/></svg>
+      </span>
+      TravelEasy
+    </a>
+    <div class="nav-new-links" id="nav-links">
+      <a href="#destinations-section">Destinations</a>
+      <a href="#results">Visa Guide</a>
+      <a href="#tools">Tools</a>
     </div>
-    <button class="theme-btn" id="theme-btn" onclick="toggleTheme()" aria-label="Switch to dark mode">☾</button>
-    <button class="nav-cta" onclick="document.getElementById('results').scrollIntoView({behavior:'smooth'})">Plan My Trip →</button>
-    <button class="nav-burger" id="nav-burger" onclick="document.getElementById('nav-links').classList.toggle('open')">☰</button>
+    <button class="nav-new-cta" onclick="document.getElementById('results').scrollIntoView({behavior:'smooth'})">Global Pass</button>
   </div>
 </nav>
 
-<!-- HERO — BOARDING PASS SPLIT -->
-<section class="hero" id="hero-section">
-  <div class="bp-wrap">
+<!-- HERO — NEW LIGHT DESIGN -->
+<section class="hero-new" id="hero-section">
+  <div class="hero-new-inner">
 
-    <!-- LEFT: dark navy panel -->
-    <div class="bp-left">
-      <div class="bp-airline">
-        <span class="bp-airline-logo">✈️</span>
-        <span class="bp-airline-name">TravelEasy &nbsp;·&nbsp; Global Pass</span>
+    <!-- LEFT: text + form -->
+    <div class="hero-left">
+      <div class="hero-eyebrow">
+        <span class="hero-eyebrow-bar" aria-hidden="true"></span>
+        Everything before you fly
       </div>
-      <div class="bp-route">
-        <div>
-          <div class="bp-iata" id="bp-from-code">IND</div>
-          <div class="bp-iata-sub" id="bp-from-name">India</div>
-        </div>
-        <div class="bp-route-mid">
-          <div class="bp-route-dash"></div>
-          <div class="bp-route-plane">✈</div>
-          <div class="bp-route-dash"></div>
-        </div>
-        <div>
-          <div class="bp-iata" id="bp-to-code">ESP</div>
-          <div class="bp-iata-sub" id="bp-to-name">Spain</div>
-        </div>
-      </div>
-      <div class="bp-meta-row">
-        <div class="bp-meta-field">
-          <span class="bp-meta-label" id="bp-first-label">Class</span>
-          <span class="bp-meta-value" id="bp-first-value">Tourist</span>
-        </div>
-        <div class="bp-meta-field">
-          <span class="bp-meta-label">Max stay</span>
-          <span class="bp-meta-value" id="bp-stay">90 days in 180</span>
-        </div>
-        <div class="bp-meta-field">
-          <span class="bp-meta-label">Visa fee</span>
-          <span class="bp-meta-value" id="bp-fee">€90</span>
-        </div>
-        <div class="bp-meta-field">
-          <span class="bp-meta-label">Processing</span>
-          <span class="bp-meta-value" id="bp-proc">15–45 days</span>
-        </div>
-      </div>
-      <div class="bp-stamp" id="bp-visa-stamp">SCHENGEN VISA</div>
-      <div class="bp-barcode">
-        <div class="bp-barcode-lines" id="bp-barcode"></div>
-        <div class="bp-barcode-num">TE-2026-GLOBAL-PASS</div>
+      <h1 class="hero-h1">Your Journey<br>
+        <span class="hero-h1-hl">Starts Here</span>
+      </h1>
+      <ul class="hero-bullets">
+        <li>Visa requirements</li>
+        <li>Transport guides</li>
+        <li>Local SIM cards</li>
+        <li>Interactive maps</li>
+      </ul>
+
+      <form class="hero-form" onsubmit="return false">
+        <label class="hero-form-field">
+          <span>My passport</span>
+          <select id="passport-select" onchange="updateBoardingPass()"></select>
+        </label>
+        <label class="hero-form-field">
+          <span>Destination</span>
+          <select id="dest-select" onchange="updateBoardingPass()"></select>
+        </label>
+        <label class="hero-form-field">
+          <span>Departure <small style="font-weight:400">(optional)</small></span>
+          <input type="date" id="trip-date" onchange="setTripDate&&setTripDate(this.value)">
+        </label>
+        <button type="button" class="hero-plan-btn" onclick="planTrip()">
+          <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.8 19.2 16 11l3.5-3.5C21 6 21.5 4 21 3c-1-.5-3 0-4.5 1.5L13 8 4.8 6.2c-.5-.1-.9.1-1.1.5l-.3.5c-.2.5-.1 1 .3 1.3L9 12l-2 3H4l-1 1 3 2 2 3 1-1v-3l3-2 3.5 5.3c.3.4.8.5 1.3.3l.5-.2c.4-.3.6-.7.5-1.2z"/></svg>
+          Plan My Trip
+        </button>
+      </form>
+
+      <div class="hero-chips-wrap">
+        <span class="hero-chips-label">Popular destinations</span>
+        <div class="hero-chips-row" id="bp-pills"></div>
       </div>
     </div>
 
-    <!-- NOTCH -->
-    <div class="bp-sep"><div class="bp-sep-dash"></div></div>
-
-    <!-- RIGHT: white stub -->
-    <div class="bp-right">
-      <div class="bp-right-header">
-        <div class="bp-right-tagline">Your Journey<br><span style="color:var(--gold)">Starts Here</span></div>
-        <div class="bp-right-sub">Visa requirements · Transport guides<br>Local SIM cards · Interactive maps</div>
-      </div>
-      <div class="bp-field-group">
-        <div class="bp-field">
-          <span class="bp-field-label">🛂 My Passport</span>
-          <select id="passport-select" onchange="updateBoardingPass()"></select>
+    <!-- RIGHT: 3D WebGL scene -->
+    <div class="hero-right">
+      <div class="hero-canvas-wrap">
+        <div class="hero-route-badge" id="hero-route-badge">
+          <div class="hrb-col">
+            <span class="hrb-label">Route</span>
+            <span class="hrb-val" id="hero-route-val">IN → JP</span>
+          </div>
+          <div class="hrb-div"></div>
+          <div class="hrb-col">
+            <span class="hrb-label">Visa</span>
+            <span class="hrb-val accent" id="hero-visa-val">eVISA via VFS</span>
+          </div>
         </div>
-        <div class="bp-field">
-          <span class="bp-field-label">🌍 Destination</span>
-          <select id="dest-select" onchange="updateBoardingPass()"></select>
-        </div>
-        <div class="bp-field">
-          <label class="bp-field-label" for="trip-date">📅 Departure date (optional)</label>
-          <input type="date" id="trip-date" class="bp-date" onchange="setTripDate(this.value)">
-        </div>
-        <button class="bp-plan-btn" onclick="planTrip()"><span class="btn-gold">✈</span> &nbsp; Plan My Trip</button>
+        <canvas id="hero-canvas" aria-label="3D destination preview"></canvas>
+        <div id="hero-no-gl" style="display:none;position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:14px;color:#4A5668">WebGL not available</div>
       </div>
-      <div class="bp-pills-wrap">
-        <span class="bp-pills-label">Popular destinations</span>
-        <div class="bp-pills" id="bp-pills"></div>
-      </div>
+      <button class="hero-hint-btn" id="hero-hint-btn" onclick="heroToggleQR()">
+        <svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#EE5A33" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M10 9.5V5a2 2 0 0 1 4 0v5"/><path d="M14 10a2 2 0 0 1 4 0v1a2 2 0 0 1 4 0v3a8 8 0 0 1-8 8h-1c-2.6 0-4.3-.9-5.8-2.4l-3.4-3.5a2 2 0 0 1 2.8-2.8L10 15"/><path d="M5 3 6.5 4.5M3 8h2M10 1v1.5M15 3l-1.2 1.2"/></svg>
+        <span id="hero-hint-text">Tap the flag to see QR code</span>
+      </button>
     </div>
 
   </div>
@@ -7439,6 +7538,378 @@ window.onload = () => {
     </button>
   </div>
 </div>
+
+
+<script>
+/* ════════════════════════════════════════════
+   HERO — 3D WebGL scene (ported from design export)
+════════════════════════════════════════════ */
+(function(){
+var TE_ACCENT = '#EE5A33';
+var TE_DESTS_DOTS = {ES:'#F6C343',US:'#3C5BA9',GB:'#C8102E',CA:'#E25C4F',AU:'#7FA6E8',TH:'#C9A7E8',JP:'#F4B3BE',SG:'#E8EDF3',AE:'#2E9E6A'};
+var TE_CHIP_NAMES = {ES:'Spain',US:'USA',GB:'UK',CA:'Canada',AU:'Australia',TH:'Thailand',JP:'Japan',SG:'Singapore',AE:'UAE'};
+var VISA_HINTS = {
+  'IN-JP':'eVISA via VFS','IN-ES':'Schengen required','IN-US':'B1/B2 visa',
+  'IN-GB':'Visitor visa','IN-CA':'ETA','IN-AU':'ETA','IN-TH':'Visa-free 30d',
+  'IN-SG':'Visa-free 30d','IN-AE':'Visa on arrival',
+  'US-JP':'Visa-free 90d','US-ES':'Visa-free 90d','US-GB':'Visa-free 6mo',
+  'GB-JP':'Visa-free 90d','GB-ES':'Visa-free 90d'
+};
+
+var heroState = {passport:'IN', destination:'JP', qr:false, noGL:false};
+var heroG = null;
+var heroCanvas = null;
+
+function heroGetVisa(){
+  var k = heroState.passport+'-'+heroState.destination;
+  return VISA_HINTS[k] || 'Check requirements';
+}
+
+function heroUpdateBadge(){
+  var rv = document.getElementById('hero-route-val');
+  var vv = document.getElementById('hero-visa-val');
+  if(rv) rv.textContent = heroState.passport + ' → ' + heroState.destination;
+  if(vv) vv.textContent = heroGetVisa();
+}
+
+window.heroToggleQR = function(){
+  heroState.qr = !heroState.qr;
+  if(heroG) heroG.target = heroState.qr ? 1 : 0;
+  var btn = document.getElementById('hero-hint-text');
+  if(btn) btn.textContent = heroState.qr ? 'Tap to see the flag' : 'Tap the flag to see QR code';
+};
+
+window.heroUpdateScene = function(){
+  var ps = document.getElementById('passport-select');
+  var ds = document.getElementById('dest-select');
+  if(ps) heroState.passport = ps.value;
+  if(ds) heroState.destination = ds.value;
+  heroUpdateBadge();
+  if(heroG){
+    heroG._buildQR();
+    heroG._paintFlag();
+  }
+  // update chips
+  document.querySelectorAll('.hero-chip').forEach(function(c){
+    c.classList.toggle('active', c.dataset.code === heroState.destination);
+  });
+};
+
+// Hook into existing updateBoardingPass
+var _origUBP = window.updateBoardingPass;
+window.updateBoardingPass = function(){
+  if(_origUBP) _origUBP.apply(this, arguments);
+  setTimeout(window.heroUpdateScene, 0);
+};
+
+/* ── Flag drawing ── */
+function teUnion(ctx,w,h){
+  ctx.fillStyle='#012169';ctx.fillRect(0,0,w,h);ctx.lineCap='butt';
+  ctx.strokeStyle='#FBFBFC';ctx.lineWidth=h*0.2;ctx.beginPath();ctx.moveTo(0,0);ctx.lineTo(w,h);ctx.moveTo(0,h);ctx.lineTo(w,0);ctx.stroke();
+  ctx.strokeStyle='#C8102E';ctx.lineWidth=h*0.065;ctx.beginPath();ctx.moveTo(0,0);ctx.lineTo(w,h);ctx.moveTo(0,h);ctx.lineTo(w,0);ctx.stroke();
+  ctx.fillStyle='#FBFBFC';ctx.fillRect(w/2-h*0.125,0,h*0.25,h);ctx.fillRect(0,h*0.375,w,h*0.25);
+  ctx.fillStyle='#C8102E';ctx.fillRect(w/2-h*0.075,0,h*0.15,h);ctx.fillRect(0,h*0.425,w,h*0.15);
+}
+function teDrawFlag(ctx,code){
+  var W=300,H=200;
+  var dot=function(x,y,r,c){ctx.fillStyle=c;ctx.beginPath();ctx.arc(x,y,r,0,Math.PI*2);ctx.fill();};
+  ctx.clearRect(0,0,W,H);
+  if(code==='JP'){ctx.fillStyle='#FBFBFC';ctx.fillRect(0,0,W,H);dot(150,100,60,'#E0353F');}
+  else if(code==='ES'){ctx.fillStyle='#AA151B';ctx.fillRect(0,0,W,H);ctx.fillStyle='#F1BF00';ctx.fillRect(0,50,W,100);}
+  else if(code==='TH'){ctx.fillStyle='#A51931';ctx.fillRect(0,0,W,H);ctx.fillStyle='#FBFBFC';ctx.fillRect(0,33.3,W,133.4);ctx.fillStyle='#2D2A4A';ctx.fillRect(0,66.7,W,66.6);}
+  else if(code==='AE'){ctx.fillStyle='#00732F';ctx.fillRect(0,0,W,67);ctx.fillStyle='#FBFBFC';ctx.fillRect(0,66.7,W,67);ctx.fillStyle='#1A1A1A';ctx.fillRect(0,133.3,W,67);ctx.fillStyle='#E3262B';ctx.fillRect(0,0,75,H);}
+  else if(code==='SG'){
+    ctx.fillStyle='#EF3340';ctx.fillRect(0,0,W,100);ctx.fillStyle='#FBFBFC';ctx.fillRect(0,100,W,100);
+    dot(60,50,30,'#FBFBFC');dot(72,50,28,'#EF3340');
+    [[88,30],[102,42],[97,62],[79,62],[74,42]].forEach(function(p){dot(p[0],p[1],4,'#FBFBFC');});
+  }
+  else if(code==='CA'){
+    ctx.fillStyle='#FBFBFC';ctx.fillRect(0,0,W,H);ctx.fillStyle='#D52B1E';ctx.fillRect(0,0,75,H);ctx.fillRect(225,0,75,H);
+    var leaf=[150,40,160,62,175,55,170,85,190,75,200,88,185,100,192,112,165,110,158,125,152,125,152,155,148,155,148,125,142,125,135,110,108,112,115,100,100,88,110,75,130,85,125,55,140,62];
+    ctx.fillStyle='#D52B1E';ctx.beginPath();ctx.moveTo(leaf[0],leaf[1]);for(var i=2;i<leaf.length;i+=2)ctx.lineTo(leaf[i],leaf[i+1]);ctx.closePath();ctx.fill();
+  }
+  else if(code==='US'){
+    ctx.fillStyle='#FBFBFC';ctx.fillRect(0,0,W,H);ctx.fillStyle='#B22234';
+    for(var r=0;r<13;r+=2)ctx.fillRect(0,r*(H/13),W,H/13+0.5);
+    ctx.fillStyle='#3C3B6E';ctx.fillRect(0,0,120,H*7/13);
+    for(var rr=0;rr<9;rr++)for(var cc=0;cc<(rr%2?5:6);cc++)dot((rr%2?20:10)+cc*20,7+rr*11.5,2.6,'#FBFBFC');
+  }
+  else if(code==='GB'){teUnion(ctx,W,H);}
+  else if(code==='AU'){
+    ctx.fillStyle='#012169';ctx.fillRect(0,0,W,H);
+    ctx.save();ctx.beginPath();ctx.rect(0,0,150,100);ctx.clip();teUnion(ctx,150,100);ctx.restore();
+    dot(75,152,13,'#FBFBFC');
+    [[228,42,6],[196,92,6],[254,84,6],[228,166,6],[240,122,4]].forEach(function(p){dot(p[0],p[1],p[2],'#FBFBFC');});
+  }
+  ctx.fillStyle='rgba(19,33,58,0.05)';ctx.fillRect(0,0,W,3);ctx.fillRect(0,H-3,W,3);
+}
+
+function teEase(x){return x<0.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2;}
+function teBack(x){var c1=1.70158,c3=c1+1;return 1+c3*Math.pow(x-1,3)+c1*Math.pow(x-1,2);}
+
+function heroInitGL(){
+  var T=window.THREE;
+  heroCanvas=document.getElementById('hero-canvas');
+  if(!T||!heroCanvas)return;
+  var cv=heroCanvas;
+  var renderer;
+  try{renderer=new T.WebGLRenderer({canvas:cv,antialias:true,alpha:true});}
+  catch(e){document.getElementById('hero-no-gl').style.display='flex';return;}
+  var reduce=window.matchMedia&&window.matchMedia('(prefers-reduced-motion:reduce)').matches;
+  renderer.setPixelRatio(Math.min(2,window.devicePixelRatio||1));
+  renderer.shadowMap.enabled=true;renderer.shadowMap.type=T.PCFSoftShadowMap;
+  try{renderer.outputColorSpace=T.SRGBColorSpace;}catch(e){try{renderer.outputEncoding=T.sRGBEncoding;}catch(e2){}}
+  renderer.setClearColor(0x000000,0);
+  var scene=new T.Scene();
+  var camera=new T.PerspectiveCamera(26,1.4,0.5,600);
+  scene.add(new T.HemisphereLight(0xffffff,0xd9e1ea,1.25));
+  var sun=new T.DirectionalLight(0xffffff,1.9);
+  sun.position.set(-26,48,22);sun.castShadow=true;sun.shadow.mapSize.set(2048,2048);
+  var sc=sun.shadow.camera;sc.left=-34;sc.right=34;sc.top=34;sc.bottom=-34;sc.near=1;sc.far=160;
+  sun.shadow.bias=-0.0006;sun.shadow.normalBias=0.02;scene.add(sun);
+  var world=new T.Group();scene.add(world);
+  var shadowFloor=new T.Mesh(new T.PlaneGeometry(300,300),new T.ShadowMaterial({opacity:0.12}));
+  shadowFloor.rotation.x=-Math.PI/2;shadowFloor.position.y=-1.6;shadowFloor.receiveShadow=true;world.add(shadowFloor);
+  var accent=new T.Color(TE_ACCENT);
+  var lightC=new T.Color('#FBFCFD');
+  var darkC=new T.Color('#D9E0E8');
+  var g=heroG={T:T,renderer:renderer,scene:scene,camera:camera,world:world,reduce:reduce,
+    p:0,target:0,t:0,last:performance.now(),mx:0,my:0,smx:0,smy:0,
+    accent:accent,light:lightC,darkScene:darkC,tmpC:new T.Color(),dummy:new T.Object3D()};
+  // pole + flag
+  var poleMat=new T.MeshStandardMaterial({color:'#D5DCE4',roughness:0.35,metalness:0.4});
+  var flagRig=new T.Group();world.add(flagRig);g.flagRig=flagRig;
+  var pole=new T.Mesh(new T.CylinderGeometry(0.26,0.3,17,20),poleMat);pole.position.y=8.5;pole.castShadow=true;flagRig.add(pole);
+  var foot=new T.Mesh(new T.CylinderGeometry(0.75,0.9,0.5,20),poleMat);foot.position.y=0.25;foot.castShadow=true;flagRig.add(foot);
+  g.ball=new T.Mesh(new T.SphereGeometry(0.62,24,16),new T.MeshStandardMaterial({color:TE_ACCENT,roughness:0.35}));
+  g.ball.position.y=17.5;g.ball.castShadow=true;flagRig.add(g.ball);
+  var fc=document.createElement('canvas');fc.width=600;fc.height=400;
+  g.flagCanvas=fc;g.flagCtx=fc.getContext('2d');g.flagCtx.scale(2,2);
+  g.flagTex=new T.CanvasTexture(fc);
+  try{g.flagTex.colorSpace=T.SRGBColorSpace;}catch(e){}
+  g.flagTex.anisotropy=4;
+  var FW=10.5,FH=7;
+  var flagGeo=new T.PlaneGeometry(FW,FH,30,18);flagGeo.translate(FW/2,0,0);
+  g.flagBase=Float32Array.from(flagGeo.attributes.position.array);g.FW=FW;
+  g.flag=new T.Mesh(flagGeo,new T.MeshStandardMaterial({map:g.flagTex,side:T.DoubleSide,roughness:0.85}));
+  g.flag.position.set(0.28,13.2,0);g.flag.castShadow=true;flagRig.add(g.flag);
+  g._paintFlag=function(){teDrawFlag(g.flagCtx,heroState.destination);g.flagTex.needsUpdate=true;};
+  g._paintFlag();
+  // bushes
+  var pinks=['#F9C0CB','#F7A8B8','#FBD3DB','#F28DA2','#FFFFFF','#F9B4C2'];
+  var trunkMat=new T.MeshStandardMaterial({color:'#7A4A3A',roughness:0.9});
+  var cubeGeo=new T.BoxGeometry(0.5,0.5,0.5);
+  var bloomMat=new T.MeshStandardMaterial({roughness:0.8});
+  function makeBush(r,trunkH,seed){
+    var rnd=function(){seed=(seed*9301+49297)%233280;return seed/233280;};
+    var grp=new T.Group();
+    var trunk=new T.Mesh(new T.BoxGeometry(0.45,trunkH,0.45),trunkMat);trunk.position.y=trunkH/2;trunk.castShadow=true;grp.add(trunk);
+    var cells=[];
+    for(var x=-r;x<=r;x+=0.5)for(var y=-r*0.8;y<=r*0.8;y+=0.5)for(var z=-r;z<=r;z+=0.5){
+      var d=Math.sqrt(x*x+(y*y)/0.64+z*z)+(rnd()-0.5)*0.7;
+      if(d<r&&d>r-1.3&&rnd()>0.18)cells.push([x,y+trunkH+r*0.55,z]);
+    }
+    var inst=new T.InstancedMesh(cubeGeo,bloomMat,cells.length);
+    var dm=new T.Object3D(),col=new T.Color();
+    cells.forEach(function(c,k){
+      dm.position.set(c[0],c[1],c[2]);dm.rotation.set(0,0,0);dm.updateMatrix();inst.setMatrixAt(k,dm.matrix);
+      col.set(pinks[Math.floor(rnd()*pinks.length)]);inst.setColorAt(k,col);
+    });
+    inst.castShadow=true;inst.receiveShadow=true;grp.add(inst);world.add(grp);return grp;
+  }
+  g.bushA=makeBush(2.6,1.6,11);g.bushB=makeBush(1.8,1.0,37);g.bushC=makeBush(1.3,0.7,73);
+  // petals
+  var PN=reduce?40:150;
+  var petalGeo=new T.PlaneGeometry(0.42,0.26);
+  var petalMat=new T.MeshStandardMaterial({color:'#F6A9B7',side:T.DoubleSide,roughness:0.7});
+  g.petals=new T.InstancedMesh(petalGeo,petalMat,PN);g.pData=[];
+  function spawnPetal(o,anywhere){
+    var S=(g.G||33)/2+6;
+    o.x=(Math.random()*2-1)*S-4;o.z=(Math.random()*2-1)*S;
+    o.y=anywhere?Math.random()*20:16+Math.random()*8;
+    o.vy=1.1+Math.random()*1.1;o.ph=Math.random()*6.28;
+    o.rx=Math.random()*6.28;o.ry=Math.random()*6.28;o.rz=Math.random()*6.28;
+    o.sp=1+Math.random()*2.5;o.s=0.7+Math.random()*0.6;o.rest=0;return o;
+  }
+  for(var i=0;i<PN;i++)g.pData.push(spawnPetal({},true));
+  world.add(g.petals);
+  // slab
+  g.slab=new T.Mesh(new T.BoxGeometry(1,1.2,1),new T.MeshStandardMaterial({color:'#E6ECF2',roughness:0.9}));
+  g.slab.position.y=-0.6;g.slab.receiveShadow=true;g.slab.castShadow=true;world.add(g.slab);
+  // QR
+  g._buildQR=function(){
+    var qr=window.qrcode(0,'M');qr.addData('https://traveleasy.app/trip/'+heroState.passport+'-'+heroState.destination);qr.make();
+    var n=qr.getModuleCount(),Q=2,G=n+Q*2;
+    if(g.tiles){g.world.remove(g.tiles);g.tiles.geometry.dispose();g.tiles.material.dispose();}
+    var geo=new T.BoxGeometry(0.9,1,0.9);geo.translate(0,0.5,0);
+    var tiles=new T.InstancedMesh(geo,new T.MeshStandardMaterial({roughness:0.75}),G*G);
+    tiles.castShadow=true;tiles.receiveShadow=true;
+    var info=[];
+    for(var r=0;r<G;r++)for(var c=0;c<G;c++){
+      var mr=r-Q,mc=c-Q;
+      var dark=mr>=0&&mc>=0&&mr<n&&mc<n&&qr.isDark(mr,mc);
+      var x=c-G/2+0.5,z=r-G/2+0.5;
+      info.push({x:x,z:z,dark:dark,delay:Math.sqrt(x*x+z*z)/G*0.55+Math.random()*0.08,jit:Math.random()});
+    }
+    tiles.setColorAt(0,lightC);g.tiles=tiles;g.tInfo=info;g.G=G;g.world.add(tiles);
+    g.slab.scale.set(G+0.6,1,G+0.6);
+    g.flagRig.position.set(-G*0.16,0.4,G*0.08);
+    g.bushA.position.set(-G*0.16-3.4,0.4,G*0.08+1.2);
+    g.bushB.position.set(G*0.28,0.4,G*0.27);
+    g.bushC.position.set(-G*0.3,0.4,-G*0.24);
+    g._frame();g._applyTiles(true);
+  };
+  g._frame=function(){
+    if(!g.G)return;
+    var tanH=Math.tan(T.MathUtils.degToRad(camera.fov/2)),a=camera.aspect,G=g.G;
+    var needV=G*1.02+10,needH=G*1.48;
+    g.sceneDist=Math.max(needV/2/tanH,needH/2/tanH/a);
+    g.qrDist=Math.max((G+2)/2/tanH,(G+2)/2/tanH/a)+1.6;
+    g.sceneDir=new T.Vector3(1,0.92,1.05).normalize();
+  };
+  g._applyTiles=function(){
+    var info=g.tInfo,tiles=g.tiles,dm=g.dummy,col=g.tmpC;
+    for(var i=0;i<info.length;i++){
+      var it=info[i];
+      var k=Math.min(1,Math.max(0,(g.p*1.5-it.delay)));
+      var e=teBack(k);var h=0.42;
+      if(it.dark){h+=0.95*e;col.copy(darkC).lerp(accent,Math.min(1,k*1.2));}
+      else{h-=0.08*Math.sin(k*Math.PI);col.copy(lightC);}
+      dm.position.set(it.x,0,it.z);dm.scale.set(1,Math.max(0.05,h),1);dm.updateMatrix();
+      tiles.setMatrixAt(i,dm.matrix);tiles.setColorAt(i,col);
+    }
+    tiles.instanceMatrix.needsUpdate=true;tiles.instanceColor.needsUpdate=true;
+  };
+  g._buildQR();
+  // sizing
+  var size=function(){
+    var w=cv.clientWidth||680,h=cv.clientHeight||560;
+    renderer.setSize(w,h,false);camera.aspect=w/h;camera.updateProjectionMatrix();g._frame();
+  };
+  size();
+  if(window.ResizeObserver){g.ro=new ResizeObserver(size);g.ro.observe(cv);}
+  // pointer
+  cv.addEventListener('pointermove',function(e){
+    if(!g)return;var r=cv.getBoundingClientRect();
+    g.mx=((e.clientX-r.left)/r.width-0.5)*2;g.my=((e.clientY-r.top)/r.height-0.5)*2;
+  });
+  cv.addEventListener('pointerleave',function(){if(g){g.mx=0;g.my=0;}});
+  cv.addEventListener('click',function(){window.heroToggleQR();});
+  // loop
+  var loop=function(now){
+    if(!heroG)return;
+    requestAnimationFrame(loop);
+    var dt=Math.min(0.05,(now-g.last)/1000);g.last=now;
+    g.t+=dt;
+    var dur=reduce?0.01:1.5;
+    var prev=g.p;
+    if(g.p<g.target)g.p=Math.min(g.target,g.p+dt/dur);
+    else if(g.p>g.target)g.p=Math.max(g.target,g.p-dt/dur);
+    var e=teEase(g.p);
+    if(g.p!==prev)g._applyTiles();
+    // pieces
+    var pieces=[g.flagRig,g.bushA,g.bushB,g.bushC];
+    for(var i=0;i<pieces.length;i++){
+      var k=Math.min(1,Math.max(0,e*1.6-i*0.12));
+      var s=Math.max(0.0001,1-k);pieces[i].scale.set(s,s,s);pieces[i].visible=s>0.002;
+    }
+    // flag wave
+    if(g.flagRig.visible){
+      var pos=g.flag.geometry.attributes.position,base=g.flagBase,t=g.t,amp=reduce?0.12:0.5;
+      for(var v=0;v<pos.count;v++){
+        var x0=base[v*3],y0=base[v*3+1];var f=x0/g.FW;
+        var z=(Math.sin(x0*0.75-t*3.4+y0*0.22)*amp+Math.sin(x0*1.6-t*5.1)*amp*0.25)*(0.15+f);
+        pos.setXYZ(v,x0-Math.abs(z)*0.12,y0-f*f*0.45,z);
+      }
+      pos.needsUpdate=true;g.flag.geometry.computeVertexNormals();
+    }
+    // petals
+    var dm=g.dummy,pd=g.pData,wind=1.1+Math.sin(g.t*0.4)*0.6,ps=1-e*0.55;
+    for(var j=0;j<pd.length;j++){
+      var o=pd[j];
+      if(!reduce){
+        if(o.rest>0){o.rest-=dt;if(o.rest<=0)spawnPetal(o,false);}
+        else{
+          o.y-=o.vy*dt;o.x+=(wind+Math.sin(g.t*1.3+o.ph)*0.8)*dt;o.z+=Math.cos(g.t*1.1+o.ph)*0.6*dt-0.35*dt;
+          o.rx+=o.sp*dt;o.ry+=o.sp*0.7*dt;
+          var half=g.G/2;
+          if(o.y<0.5&&Math.abs(o.x)<half&&Math.abs(o.z)<half){o.y=0.45+Math.random()*0.05;o.rx=Math.PI/2;o.rest=2+Math.random()*3;}
+          else if(o.y<-1.4)spawnPetal(o,false);
+        }
+      }
+      dm.position.set(o.x,o.y,o.z);dm.rotation.set(o.rx,o.ry,o.rz);
+      var sc=o.s*ps*(o.rest>0?Math.min(1,o.rest):1);dm.scale.set(sc,sc,sc);dm.updateMatrix();
+      g.petals.setMatrixAt(j,dm.matrix);
+    }
+    g.petals.instanceMatrix.needsUpdate=true;
+    // world sway
+    g.smx+=(g.mx-g.smx)*Math.min(1,dt*4);g.smy+=(g.my-g.smy)*Math.min(1,dt*4);
+    var sway=reduce?0:Math.sin(g.t*0.35)*0.05;
+    g.world.rotation.y=(sway+g.smx*0.16)*(1-e);
+    // camera
+    var cam=g.camera;
+    var scenePos=g.sceneDir.clone().multiplyScalar(g.sceneDist);
+    scenePos.y+=g.smy*-2.5*(1-e);
+    var qrPos=new T.Vector3(0,g.qrDist,0.001);
+    var arc=Math.sin(e*Math.PI)*g.G*0.25;
+    cam.position.copy(scenePos).lerp(qrPos,e);cam.position.y+=arc;
+    var up=new T.Vector3(0,1,0).lerp(new T.Vector3(0,0,-1),e).normalize();
+    cam.up.copy(up);cam.lookAt(0,4.2*(1-e),0);
+    renderer.render(scene,camera);
+  };
+  requestAnimationFrame(loop);
+}
+
+/* ── Build destination chips ── */
+function heroInitChips(){
+  var container=document.getElementById('bp-pills');
+  if(!container)return;
+  container.innerHTML='';
+  var dests=['ES','US','GB','CA','AU','TH','JP','SG','AE'];
+  var dots={ES:'#F6C343',US:'#3C5BA9',GB:'#C8102E',CA:'#E25C4F',AU:'#7FA6E8',TH:'#C9A7E8',JP:'#F4B3BE',SG:'#E8EDF3',AE:'#2E9E6A'};
+  var names={ES:'Spain',US:'USA',GB:'UK',CA:'Canada',AU:'Australia',TH:'Thailand',JP:'Japan',SG:'Singapore',AE:'UAE'};
+  dests.forEach(function(code){
+    var btn=document.createElement('button');
+    btn.type='button';btn.className='hero-chip'+(code===heroState.destination?' active':'');
+    btn.dataset.code=code;
+    btn.innerHTML='<span class="hero-chip-dot" style="background:'+dots[code]+'"></span>'+names[code];
+    btn.onclick=function(){
+      var ds=document.getElementById('dest-select');
+      if(ds){ds.value=code;ds.dispatchEvent(new Event('change'));}
+      else{
+        heroState.destination=code;heroUpdateBadge();
+        if(heroG){heroG._buildQR();heroG._paintFlag();}
+        document.querySelectorAll('.hero-chip').forEach(function(c){c.classList.toggle('active',c.dataset.code===code);});
+      }
+    };
+    container.appendChild(btn);
+  });
+}
+
+/* ── Init on DOM ready ── */
+function heroInit(){
+  heroInitChips();
+  heroUpdateBadge();
+  // wait for Three.js + qrcode
+  var tries=0;
+  var go=function(){
+    if(window.THREE&&window.qrcode&&document.getElementById('hero-canvas')){heroInitGL();return;}
+    if(++tries<200)setTimeout(go,50);
+  };
+  go();
+  // nav scroll style
+  var nav=document.getElementById('navbar');
+  if(nav){
+    window.addEventListener('scroll',function(){
+      nav.classList.toggle('scrolled',window.scrollY>20);
+    },{passive:true});
+  }
+}
+
+if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',heroInit);}
+else{heroInit();}
+})();
+</script>
 
 </body>
 </html>
