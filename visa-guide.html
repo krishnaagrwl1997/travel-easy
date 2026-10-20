@@ -342,26 +342,28 @@ body{font-family:var(--font-body);background:#f0ece4;color:var(--gray-800);line-
 .dest-cards-scroll::-webkit-scrollbar{display:none}
 
 /* ── BAG TAG CARD ── */
-.dest-card-new{flex:0 0 200px;background:#fff;border-radius:16px;cursor:pointer;transition:all 0.3s;scroll-snap-align:start;position:relative;overflow:hidden;box-shadow:0 4px 20px rgba(0,0,0,0.1),0 1px 3px rgba(0,0,0,0.06)}
-.dest-card-new:hover{transform:translateY(-8px);box-shadow:0 20px 48px rgba(0,0,0,0.18)}
-/* punched hole at top */
-.dcn-hole{width:20px;height:20px;border-radius:50%;background:#f5f0e8;border:1.5px solid rgba(255,255,255,0.3);position:absolute;top:14px;left:50%;transform:translateX(-50%);z-index:2;box-shadow:0 0 0 4px rgba(0,0,0,0.12)}
-/* colored header */
-.dcn-header{height:90px;background:var(--card-bg);display:flex;align-items:center;justify-content:center;position:relative;padding-top:8px}
-.dcn-flag{font-size:2.2rem;filter:drop-shadow(0 4px 8px rgba(0,0,0,0.3));position:relative;z-index:1}
-.dcn-code{position:absolute;bottom:8px;right:10px;font-family:var(--font-display);font-size:13px;font-weight:900;color:rgba(255,255,255,0.5);letter-spacing:1px}
+.dest-card-new{flex:0 0 192px;background:#fff;border-radius:16px;cursor:pointer;transition:all 0.25s;scroll-snap-align:start;position:relative;overflow:hidden;border:1px solid #DCE3EB;box-shadow:0 2px 10px rgba(19,33,58,0.06)}
+.dest-card-new:hover{transform:translateY(-5px);border-color:var(--card-accent,#EE5A33);box-shadow:0 12px 32px rgba(19,33,58,0.1)}
+/* accent bar */
+.dcn-accent-bar{height:3px;background:var(--card-accent,#EE5A33);position:absolute;top:0;left:0;right:0}
+/* punch hole — hidden in new design */
+.dcn-hole{display:none}
+/* header */
+.dcn-header{height:80px;background:#F7F9FB;display:flex;align-items:center;justify-content:space-between;padding:0 14px;border-bottom:1px solid #EEF2F7;margin-top:3px}
+.dcn-flag{font-size:2.6rem;line-height:1}
+.dcn-code{font-family:'IBM Plex Mono',monospace;font-size:10px;font-weight:700;letter-spacing:0.12em;color:#4A5668;background:#EEF2F7;padding:4px 8px;border-radius:999px;flex-shrink:0}
 /* body */
-.dcn-body{padding:14px 14px 12px}
-.dcn-name{font-family:var(--font-display);font-size:15px;font-weight:800;color:#0c1340;letter-spacing:-0.3px;margin-bottom:2px}
-.dcn-sub{font-size:10px;color:#94a3b8;font-weight:700;text-transform:uppercase;letter-spacing:1px;margin-bottom:10px}
+.dcn-body{padding:12px 14px 10px}
+.dcn-name{font-family:'IBM Plex Mono',monospace;font-size:14px;font-weight:700;color:#13213A;letter-spacing:-0.02em;margin-bottom:2px}
+.dcn-sub{font-size:9px;color:#EE5A33;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:10px}
 .dcn-fields{display:flex;flex-direction:column;gap:5px;margin-bottom:10px}
-.dcn-field{display:flex;justify-content:space-between;align-items:baseline}
-.dcn-field-label{font-size:8px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:#94a3b8}
-.dcn-field-value{font-size:11px;font-weight:700;color:#0c1340;font-family:var(--font-display)}
+.dcn-field{display:flex;justify-content:space-between;align-items:baseline;gap:6px}
+.dcn-field-label{font-size:8px;font-weight:700;text-transform:uppercase;letter-spacing:0.15em;color:#8A9AB0;flex-shrink:0}
+.dcn-field-value{font-size:11px;font-weight:700;color:#13213A;font-family:'IBM Plex Mono',monospace;text-align:right}
 /* barcode strip */
-.dcn-barcode{border-top:1px dashed #e8e4dc;padding-top:8px;display:flex;gap:1px;align-items:flex-end;height:28px}
-.dcn-barcode span{background:#0c1340;opacity:0.15;border-radius:1px;width:2px}
-.dest-card-new:hover .dcn-barcode span{opacity:0.3}
+.dcn-barcode{border-top:1px solid #EEF2F7;padding-top:8px;display:flex;gap:1px;align-items:flex-end;height:26px}
+.dcn-barcode span{background:var(--card-accent,#13213A);opacity:0.15;border-radius:1px;width:2px}
+.dest-card-new:hover .dcn-barcode span{opacity:0.4}
 
 /* legacy support */
 .dcn-meta{display:none}
@@ -526,8 +528,7 @@ body{font-family:var(--font-body);background:#f0ece4;color:var(--gray-800);line-
 .tab-panel.active{animation:fadeUp2 0.25s cubic-bezier(0.22,1,0.36,1)}
 
 /* Card hover lifts */
-.dest-card-new{transition:transform 0.22s ease,box-shadow 0.22s ease}
-.dest-card-new:hover{transform:translateY(-5px) scale(1.015);box-shadow:0 14px 36px rgba(0,0,0,0.16)}
+.dest-card-new{transition:transform 0.25s ease,box-shadow 0.25s ease,border-color 0.25s ease}
 .info-card{transition:transform 0.2s ease,box-shadow 0.2s ease}
 .info-card:hover{transform:translateY(-2px);box-shadow:0 6px 24px rgba(0,0,0,0.09)}
 .budget-card{transition:transform 0.2s ease,box-shadow 0.2s ease,border-color 0.2s}
@@ -1223,7 +1224,9 @@ body{font-family:'IBM Plex Mono',ui-monospace,monospace!important}
 .hero-bullets li::before{content:'';width:6px;height:6px;border-radius:50%;background:#EE5A33;flex-shrink:0}
 .hero-form{background:#fff;border-radius:26px;padding:16px;box-shadow:0 1px 0 #DCE3EB,0 24px 48px -28px rgba(19,33,58,0.3);display:grid;grid-template-columns:repeat(auto-fit,minmax(168px,1fr));gap:10px;align-items:end}
 .hero-form-field{display:flex;flex-direction:column;gap:7px;font-size:12px;font-weight:600;color:#3D4A5C}
-.hero-form-field select,.hero-form-field input[type=date]{height:52px;border:1px solid #CBD4DF;border-radius:14px;padding:0 13px;font-size:15px;font-weight:500;color:#13213A;background:#F7F9FB;cursor:pointer;font-family:'IBM Plex Mono',monospace;width:100%;box-sizing:border-box;-webkit-appearance:none;appearance:none}
+.hero-form-field select,.hero-form-field input[type=date]{height:52px;border:1.5px solid #CBD4DF;border-radius:14px;padding:0 40px 0 14px;font-size:15px;font-weight:500;color:#13213A!important;background:#fff!important;cursor:pointer;font-family:'IBM Plex Mono',monospace;width:100%;box-sizing:border-box;-webkit-appearance:none;appearance:none;transition:border-color 0.2s,box-shadow 0.2s}
+.hero-form-field select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%233D4A5C' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E")!important;background-repeat:no-repeat!important;background-position:right 14px center!important}
+.hero-form-field input[type=date]{padding:0 14px;color:#13213A!important;background:#fff!important}
 .hero-form-field select:focus,.hero-form-field input:focus{outline:none;border-color:#13213A;box-shadow:0 0 0 3px rgba(19,33,58,0.09)}
 .hero-plan-btn{height:52px;border:0;border-radius:14px;background:#EE5A33;color:#fff;font-size:16px;font-weight:700;display:flex;align-items:center;justify-content:center;gap:8px;cursor:pointer;font-family:'IBM Plex Mono',monospace;box-shadow:0 12px 28px -14px rgba(238,90,51,0.85);transition:all 0.2s}
 .hero-plan-btn:hover{transform:translateY(-2px);box-shadow:0 20px 36px -14px rgba(238,90,51,0.9)}
@@ -1280,8 +1283,8 @@ body{font-family:'IBM Plex Mono',ui-monospace,monospace!important}
 .tab-content{background:#fff!important;border:1px solid #DCE3EB!important}
 
 /* ── CARDS ── */
-.dest-card-new,.info-card,.budget-card,.stay-item{background:#fff!important;border:1px solid #DCE3EB!important;box-shadow:0 2px 8px rgba(19,33,58,0.05)!important}
-.dest-card-new:hover,.info-card:hover,.budget-card:hover{transform:translateY(-3px);border-color:#EE5A33!important;box-shadow:0 8px 24px rgba(238,90,51,0.1)!important}
+.info-card,.budget-card,.stay-item{background:#fff!important;border:1px solid #DCE3EB!important;box-shadow:0 2px 8px rgba(19,33,58,0.05)!important}
+.info-card:hover,.budget-card:hover{transform:translateY(-3px);border-color:#EE5A33!important;box-shadow:0 8px 24px rgba(238,90,51,0.1)!important}
 .ic-title,.brief-step-title,.tl-step-title{color:#13213A!important}
 .brief-step-desc,.tl-step-sub{color:#3D4A5C!important}
 
@@ -1350,6 +1353,17 @@ body{font-family:'IBM Plex Mono',ui-monospace,monospace!important}
 .share-btn.vis{display:flex}
 .share-btn:hover{background:rgba(255,255,255,0.22)}
 .share-btn.copied{background:rgba(16,185,129,0.25);border-color:rgba(16,185,129,0.4)}
+
+/* ── COUNTRY MAP OVERLAY ── */
+.hero-map-overlay{position:absolute;inset:0;border-radius:12px;background:#EEF2F7;z-index:3;display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity 0.35s ease;transform:scale(0.97);transition:opacity 0.35s ease,transform 0.35s ease}
+.hero-map-overlay.visible{opacity:1;pointer-events:all;transform:scale(1)}
+.hmo-inner{display:flex;flex-direction:column;align-items:center;gap:14px;padding:20px;width:100%;height:100%;box-sizing:border-box}
+.hmo-header{display:flex;align-items:center;gap:12px;width:100%}
+.hmo-flag{font-size:2.2rem;line-height:1}
+.hmo-info{display:flex;flex-direction:column;gap:2px}
+.hmo-name{font-family:'IBM Plex Mono',monospace;font-size:18px;font-weight:700;color:#13213A;letter-spacing:-0.03em}
+.hmo-visa{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:#EE5A33}
+.hmo-canvas{width:100%;flex:1;min-height:0;display:block}
 
 </style>
 </head>
@@ -1437,10 +1451,23 @@ body{font-family:'IBM Plex Mono',ui-monospace,monospace!important}
         <div id="hero-skeleton" class="hero-skeleton"><div class="hero-skel-shimmer"></div></div>
         <canvas id="hero-canvas" aria-label="3D destination preview"></canvas>
         <div id="hero-no-gl" style="display:none;position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:14px;color:#4A5668">WebGL not available</div>
+        <!-- Country map overlay (replaces QR view) -->
+        <div id="hero-map-overlay" class="hero-map-overlay">
+          <div class="hmo-inner">
+            <div class="hmo-header">
+              <span id="hmo-flag" class="hmo-flag">🇯🇵</span>
+              <div class="hmo-info">
+                <span id="hmo-name" class="hmo-name">Japan</span>
+                <span id="hmo-visa" class="hmo-visa">eVISA via VFS</span>
+              </div>
+            </div>
+            <canvas id="hero-map-c" class="hmo-canvas" width="320" height="220" aria-label="Country map"></canvas>
+          </div>
+        </div>
       </div>
       <button class="hero-hint-btn" id="hero-hint-btn" onclick="heroToggleQR()">
         <svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#EE5A33" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M10 9.5V5a2 2 0 0 1 4 0v5"/><path d="M14 10a2 2 0 0 1 4 0v1a2 2 0 0 1 4 0v3a8 8 0 0 1-8 8h-1c-2.6 0-4.3-.9-5.8-2.4l-3.4-3.5a2 2 0 0 1 2.8-2.8L10 15"/><path d="M5 3 6.5 4.5M3 8h2M10 1v1.5M15 3l-1.2 1.2"/></svg>
-        <span id="hero-hint-text">Tap the flag to see QR code</span>
+        <span id="hero-hint-text">Tap to see country map</span>
       </button>
     </div>
 
@@ -7138,8 +7165,8 @@ function renderDestinationUI() {
     cards.innerHTML = DESTINATIONS.map(d => {
       const m = DEST_CARD[d.c] || {};
       const t = DEST_THEME[d.c] || {bg:'linear-gradient(135deg,#1e3a8a,#3b82f6)'};
-      return `<div class="dest-card-new" role="button" tabindex="0" aria-label="Open the ${d.n} guide" onclick="quickSelectFromGlobe('${d.c}')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click()}" style="--card-bg:${t.bg}">
-        <div class="dcn-hole"></div>
+      return `<div class="dest-card-new" role="button" tabindex="0" aria-label="Open the ${d.n} guide" onclick="quickSelectFromGlobe('${d.c}')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click()}" style="--card-accent:${t.p||'#EE5A33'}">
+        <div class="dcn-accent-bar"></div>
         <div class="dcn-header"><span class="dcn-flag">${d.f}</span><span class="dcn-code">${m.code || d.c}</span></div>
         <div class="dcn-body">
           <div class="dcn-name">${d.n}</div>
@@ -7654,11 +7681,169 @@ function heroUpdateBadge(){
   if(vv) vv.textContent = heroGetVisa();
 }
 
+/* ── Simplified country map paths (normalized 0-320 × 0-220) ── */
+var COUNTRY_MAPS = {
+  JP:{
+    name:'Japan',
+    shapes:[
+      // Honshu
+      [[158,18],[180,12],[198,22],[202,42],[192,62],[172,80],[152,90],[132,86],[120,72],[122,50],[130,32],[145,22]],
+      // Hokkaido
+      [[118,52],[100,48],[86,36],[90,22],[110,16],[128,24],[132,38]],
+      // Kyushu
+      [[116,96],[128,90],[140,98],[140,112],[126,118],[114,112],[110,100]]
+    ]
+  },
+  ES:{
+    name:'Spain',
+    shapes:[
+      [[24,72],[30,44],[54,30],[100,28],[140,36],[162,54],[158,78],[130,94],[90,100],[52,96],[28,84]]
+    ]
+  },
+  US:{
+    name:'United States',
+    shapes:[
+      // Continental US
+      [[18,54],[24,30],[56,22],[108,20],[160,24],[196,36],[204,58],[194,76],[158,88],[118,90],[78,90],[42,84],[20,68]],
+      // Florida peninsula
+      [[158,88],[162,108],[148,118],[138,100],[142,88]]
+    ]
+  },
+  GB:{
+    name:'United Kingdom',
+    shapes:[
+      // England + Wales
+      [[130,90],[118,72],[114,58],[122,44],[134,38],[148,44],[152,60],[144,76],[136,88]],
+      // Scotland
+      [[122,44],[116,34],[104,22],[114,14],[130,18],[140,30],[138,38]],
+      // Wales notch
+      [[114,76],[106,82],[102,74],[108,66],[114,66]]
+    ]
+  },
+  CA:{
+    name:'Canada',
+    shapes:[
+      [[18,80],[22,46],[50,28],[100,18],[156,20],[196,32],[214,54],[208,70],[168,76],[128,74],[88,76],[52,74],[22,72]]
+    ]
+  },
+  AU:{
+    name:'Australia',
+    shapes:[
+      [[40,64],[48,36],[80,20],[124,18],[166,26],[192,46],[198,74],[182,92],[144,104],[100,104],[68,96],[46,80]],
+      // Tasmania
+      [[134,112],[144,108],[150,118],[144,126],[132,122],[128,114]]
+    ]
+  },
+  TH:{
+    name:'Thailand',
+    shapes:[
+      // Main northern body
+      [[118,22],[138,14],[156,22],[160,42],[152,62],[140,76],[128,82],[116,76],[108,62],[110,42],[114,28]],
+      // Southern peninsula
+      [[128,82],[126,98],[124,116],[120,136],[116,132],[116,114],[118,98],[120,84]]
+    ]
+  },
+  SG:{
+    name:'Singapore',
+    shapes:[
+      [[144,148],[158,144],[166,152],[162,162],[148,164],[138,156]]
+    ]
+  },
+  AE:{
+    name:'UAE',
+    shapes:[
+      [[84,76],[102,60],[128,62],[152,72],[158,90],[144,102],[116,106],[92,98],[80,88]]
+    ]
+  }
+};
+
+var DEST_FLAGS={JP:'🇯🇵',ES:'🇪🇸',US:'🇺🇸',GB:'🇬🇧',CA:'🇨🇦',AU:'🇦🇺',TH:'🇹🇭',SG:'🇸🇬',AE:'🇦🇪'};
+
+function teDrawCountryMap(code){
+  var cv=document.getElementById('hero-map-c');
+  if(!cv)return;
+  var ctx=cv.getContext('2d');
+  var W=cv.width,H=cv.height;
+  ctx.clearRect(0,0,W,H);
+  var data=COUNTRY_MAPS[code];
+  if(!data){
+    // fallback: draw flag emoji large
+    ctx.font='80px sans-serif';
+    ctx.textAlign='center';
+    ctx.textBaseline='middle';
+    ctx.fillText(DEST_FLAGS[code]||'🌍',W/2,H/2);
+    return;
+  }
+  // find bounding box of all shapes
+  var allX=[],allY=[];
+  data.shapes.forEach(function(s){s.forEach(function(p){allX.push(p[0]);allY.push(p[1]);});});
+  var minX=Math.min.apply(null,allX),maxX=Math.max.apply(null,allX);
+  var minY=Math.min.apply(null,allY),maxY=Math.max.apply(null,allY);
+  var pad=24;
+  var scaleX=(W-pad*2)/(maxX-minX||1);
+  var scaleY=(H-pad*2)/(maxY-minY||1);
+  var sc=Math.min(scaleX,scaleY);
+  var offX=(W-(maxX-minX)*sc)/2-minX*sc;
+  var offY=(H-(maxY-minY)*sc)/2-minY*sc;
+  function px(x,y){return [x*sc+offX,y*sc+offY];}
+  // draw subtle grid dots
+  ctx.fillStyle='rgba(19,33,58,0.05)';
+  for(var gx=0;gx<W;gx+=16)for(var gy=0;gy<H;gy+=16){ctx.beginPath();ctx.arc(gx,gy,1,0,Math.PI*2);ctx.fill();}
+  // shadow
+  ctx.save();
+  ctx.shadowColor='rgba(19,33,58,0.18)';
+  ctx.shadowBlur=12;
+  ctx.shadowOffsetY=4;
+  data.shapes.forEach(function(shape){
+    var p0=px(shape[0][0],shape[0][1]);
+    ctx.beginPath();ctx.moveTo(p0[0],p0[1]);
+    for(var i=1;i<shape.length;i++){var p=px(shape[i][0],shape[i][1]);ctx.lineTo(p[0],p[1]);}
+    ctx.closePath();
+    ctx.fillStyle='#fff';ctx.fill();
+  });
+  ctx.restore();
+  // fill + stroke
+  data.shapes.forEach(function(shape){
+    var p0=px(shape[0][0],shape[0][1]);
+    ctx.beginPath();ctx.moveTo(p0[0],p0[1]);
+    for(var i=1;i<shape.length;i++){var p=px(shape[i][0],shape[i][1]);ctx.lineTo(p[0],p[1]);}
+    ctx.closePath();
+    ctx.fillStyle='#EEF2F7';ctx.fill();
+    ctx.strokeStyle='#13213A';ctx.lineWidth=1.5;ctx.lineJoin='round';ctx.stroke();
+  });
+  // accent dot at capital
+  var cx=(minX+maxX)/2,cy=(minY+maxY)/2;
+  var cp=px(cx,cy);
+  ctx.beginPath();ctx.arc(cp[0],cp[1],5,0,Math.PI*2);
+  ctx.fillStyle='#EE5A33';ctx.fill();
+  ctx.strokeStyle='#fff';ctx.lineWidth=2;ctx.stroke();
+}
+
+function heroShowMap(code){
+  var overlay=document.getElementById('hero-map-overlay');
+  if(!overlay)return;
+  var flag=document.getElementById('hmo-flag');
+  var name=document.getElementById('hmo-name');
+  var visa=document.getElementById('hmo-visa');
+  if(flag)flag.textContent=DEST_FLAGS[code]||'🌍';
+  if(name)name.textContent=(COUNTRY_MAPS[code]&&COUNTRY_MAPS[code].name)||code;
+  if(visa)visa.textContent=heroGetVisa();
+  teDrawCountryMap(code);
+  overlay.classList.add('visible');
+}
+
 window.heroToggleQR = function(){
   heroState.qr = !heroState.qr;
-  if(heroG) heroG.target = heroState.qr ? 1 : 0;
+  var overlay=document.getElementById('hero-map-overlay');
+  if(heroState.qr){
+    heroShowMap(heroState.destination);
+    if(heroG)heroG.target=0;
+  } else {
+    if(overlay)overlay.classList.remove('visible');
+    if(heroG)heroG.target=0;
+  }
   var btn = document.getElementById('hero-hint-text');
-  if(btn) btn.textContent = heroState.qr ? 'Tap to see the flag' : 'Tap the flag to see QR code';
+  if(btn) btn.textContent = heroState.qr ? 'Tap to close map' : 'Tap to see country map';
 };
 
 window.heroUpdateScene = function(){
@@ -7668,9 +7853,11 @@ window.heroUpdateScene = function(){
   if(ds) heroState.destination = ds.value;
   heroUpdateBadge();
   if(heroG){
-    heroG._buildQR();
     heroG._paintFlag();
+    if(typeof heroG._buildQR === 'function') heroG._buildQR();
   }
+  // if map is open, redraw for new destination
+  if(heroState.qr) heroShowMap(heroState.destination);
   // update chips
   document.querySelectorAll('.hero-chip').forEach(function(c){
     c.classList.toggle('active', c.dataset.code === heroState.destination);
