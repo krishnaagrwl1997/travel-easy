@@ -122,14 +122,14 @@ body{font-family:var(--font-body);background:#f0ece4;color:var(--gray-800);line-
 .plan-btn:active{transform:scale(0.99)}
 
 /* ── MARQUEE STRIP — CREAM STAMP TICKER ── */
-.marquee-strip{background:#f5f0e8;overflow:hidden;padding:12px 0;border-top:1px solid #e8e4dc;border-bottom:1px solid #e8e4dc}
+.marquee-strip{background:#EEF2F7;overflow:hidden;padding:12px 0;border-top:1px solid #DCE3EB;border-bottom:1px solid #DCE3EB}
 .marquee-track{display:flex;align-items:center;gap:10px;white-space:nowrap;animation:marqueeScroll 40s linear infinite}
 .marquee-item{display:inline-flex;align-items:center;gap:7px;flex-shrink:0}
 .marquee-flag{font-size:16px;line-height:1}
 .marquee-name{font-size:12px;font-weight:700;color:#0c1340;font-family:var(--font-display)}
 .marquee-tag{font-size:9px;font-weight:800;text-transform:uppercase;letter-spacing:1.5px;padding:3px 9px;border-radius:3px;border:1.5px solid;white-space:nowrap;font-family:var(--font-body)}
-.marquee-tag.free{color:#065f46;border-color:#6ee7b7;background:#d1fae5}
-.marquee-tag.visa{color:#92400e;border-color:#fcd34d;background:#fffbeb}
+.marquee-tag.free{color:#065f46;border-color:#6ee7b7;background:#ecfdf5}
+.marquee-tag.visa{color:#92400e;border-color:#EE5A33;background:#fff7f5}
 .marquee-tag.eta{color:#1e40af;border-color:#93c5fd;background:#eff6ff}
 .marquee-sep{font-size:16px;color:#d4cdc4;margin:0 8px;flex-shrink:0}
 @keyframes marqueeScroll{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
@@ -198,7 +198,7 @@ body{font-family:var(--font-body);background:#f0ece4;color:var(--gray-800);line-
 /* ── TABS — horizontal strip inside result chrome ── */
 .tabs-nav{display:flex;background:#fff;border-radius:0 0 0 0;padding:0;gap:0;margin-bottom:20px;overflow-x:auto;scrollbar-width:none;box-shadow:0 4px 20px rgba(0,0,0,0.08);border-radius:0 0 16px 16px}
 .tabs-nav::-webkit-scrollbar{display:none}
-.tab-btn{flex-shrink:0;padding:10px 14px;font-size:10px;font-weight:700;color:#94a3b8;background:transparent;border:none;border-right:.5px solid #f0ece4;cursor:pointer;transition:all 0.2s;display:flex;align-items:center;justify-content:center;gap:5px;white-space:nowrap;font-family:var(--font-body);letter-spacing:0.3px;text-transform:uppercase}
+.tab-btn{flex-shrink:0;padding:10px 14px;font-size:10px;font-weight:700;color:#94a3b8;background:transparent;border:none;border-right:.5px solid #f0ece4;cursor:pointer;transition:all 0.2s;display:flex;align-items:center;justify-content:center;gap:6px;white-space:nowrap;font-family:var(--font-body);letter-spacing:0.3px;text-transform:uppercase}
 .tab-btn:hover{color:#0c1340;background:#f8f6f2}
 .tab-btn.active{color:#0c1340;background:#f5f0e8;border-bottom:2px solid #0c1340}
 .tab-btn:last-child{border-right:none}
@@ -343,7 +343,7 @@ body{font-family:var(--font-body);background:#f0ece4;color:var(--gray-800);line-
 
 /* ── BAG TAG CARD ── */
 .dest-card-new{flex:0 0 192px;background:#fff;border-radius:16px;cursor:pointer;transition:all 0.25s;scroll-snap-align:start;position:relative;overflow:hidden;border:1px solid #DCE3EB;box-shadow:0 2px 10px rgba(19,33,58,0.06)}
-.dest-card-new:hover{transform:translateY(-5px);border-color:var(--card-accent,#EE5A33);box-shadow:0 12px 32px rgba(19,33,58,0.1)}
+.dest-card-new:hover{transform:translateY(-5px);border-color:var(--card-accent,#EE5A33);box-shadow:0 12px 32px rgba(19,33,58,0.1);cursor:pointer}.dest-card-new:active{transform:translateY(-2px) scale(0.98);box-shadow:0 4px 12px rgba(19,33,58,0.1)}
 /* accent bar */
 .dcn-accent-bar{height:3px;background:var(--card-accent,#EE5A33);position:absolute;top:0;left:0;right:0}
 /* punch hole — hidden in new design */
@@ -605,7 +605,7 @@ body{font-family:var(--font-body);background:#f0ece4;color:var(--gray-800);line-
 
 @media(max-width:480px){
   .aria-panel{width:calc(100vw - 20px);right:10px;bottom:86px}
-  .aria-btn{bottom:16px;right:16px;width:52px;height:52px}
+  .aria-btn{bottom:16px;right:16px;width:52px;height:52px}.scroll-top-btn{bottom:80px;right:14px}
   .tab-hero{padding:12px 14px}
   .tab-hero-title{font-size:14px}
   .result-main-title{font-size:16px}
@@ -1264,7 +1264,7 @@ body{font-family:'IBM Plex Mono',ui-monospace,monospace!important}
 }
 
 /* ── MARQUEE ── */
-.marquee-strip{background:#fff!important;border-top:1px solid #DCE3EB!important;border-bottom:1px solid #DCE3EB!important}
+.marquee-strip{background:#EEF2F7!important;border-top:1px solid #DCE3EB!important;border-bottom:1px solid #DCE3EB!important}
 .marquee-name{color:#13213A!important}
 
 /* ── MAIN ── */
@@ -1344,7 +1344,59 @@ body{font-family:'IBM Plex Mono',ui-monospace,monospace!important}
 [data-theme="dark"] .hrb-val{color:#EEF2F7}
 
 /* ── SCROLL-TO-TOP ── */
-.scroll-top-btn{position:fixed;bottom:104px;right:28px;z-index:998;width:44px;height:44px;border-radius:50%;background:#13213A;color:#fff;border:none;cursor:pointer;font-size:18px;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 16px rgba(19,33,58,0.3);opacity:0;transform:translateY(16px);transition:opacity 0.3s,transform 0.3s,background 0.2s;pointer-events:none}
+
+
+
+
+
+
+
+/* Improvement 10 – footer skeleton */
+.footer-dest-skel{display:inline-block;width:70px;height:12px;border-radius:4px;background:#DCE3EB;margin:3px 0;animation:skelMove 1.4s ease-in-out infinite}
+/* Improvement 9 – compare badges */
+.cmp-win{color:#065f46;font-weight:700}.cmp-lose{color:#b91c1c;opacity:0.8}.cmp-win-badge{display:inline-block;font-size:9px;font-weight:700;padding:1px 5px;border-radius:4px;background:#d1fae5;color:#065f46;margin-left:4px;vertical-align:middle;letter-spacing:.04em}.cmp-lose-badge{display:inline-block;font-size:9px;font-weight:700;padding:1px 5px;border-radius:4px;background:#fee2e2;color:#b91c1c;margin-left:4px;vertical-align:middle;letter-spacing:.04em}
+/* Improvement 6 – tab hero light theme */
+.tab-hero{background:#fff!important;border:1px solid #DCE3EB!important;border-radius:14px!important;padding:16px 20px!important;margin-bottom:18px!important;display:flex!important;align-items:center!important;gap:14px!important;box-shadow:0 2px 10px rgba(19,33,58,0.06)!important}
+.tab-hero-icon{background:#EEF2F7!important;border:1px solid #DCE3EB!important;border-radius:10px!important}
+.tab-hero-title{color:#13213A!important}
+.tab-hero-sub{color:#64748b!important}
+.tab-hero-badge{background:#EEF2F7!important;border-color:#DCE3EB!important;color:#EE5A33!important}
+.tab-hero-badge.green{background:#d1fae5!important;border-color:#6ee7b7!important;color:#065f46!important}
+:root:not([data-theme="light"]) .tab-hero{background:var(--surface)!important;border-color:var(--line)!important}
+:root:not([data-theme="light"]) .tab-hero-title{color:var(--ink)!important}
+:root:not([data-theme="light"]) .tab-hero-sub{color:var(--ink-2)!important}
+:root:not([data-theme="light"]) .tab-hero-icon{background:var(--surface-2)!important;border-color:var(--line)!important}
+:root[data-theme="dark"] .tab-hero{background:var(--surface)!important;border-color:var(--line)!important}
+:root[data-theme="dark"] .tab-hero-title{color:var(--ink)!important}
+:root[data-theme="dark"] .tab-hero-sub{color:var(--ink-2)!important}
+:root[data-theme="dark"] .tab-hero-icon{background:var(--surface-2)!important;border-color:var(--line)!important}
+/* Improvement 4 – passport field prominent on mobile */
+@media(max-width:700px){
+  .hero-form{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  .hero-form .hero-form-field:first-child{grid-column:1/2}
+  .hero-form .hero-form-field:nth-child(2){grid-column:2/3}
+  .hero-form .hero-form-field:nth-child(3){grid-column:1/-1}
+  .hero-form .hero-plan-btn{grid-column:1/-1}
+  .hero-form-field:first-child label,.hero-form-field:first-child>span{color:#EE5A33!important;font-weight:700!important}
+}
+/* Improvement 3 – stat card pulse */
+@keyframes statPulse{0%{transform:scale(1)}50%{transform:scale(1.04);background:#EEF2F7}100%{transform:scale(1)}}
+.stat-pulse{animation:statPulse 0.5s ease}
+/* Improvement 2 – sticky tabs on mobile */
+.tabs-nav-sticky-wrap{position:sticky;top:0;z-index:900;background:#fff;border-bottom:1px solid #EEF2F7;box-shadow:0 2px 8px rgba(19,33,58,0.06)}
+@media(min-width:701px){.tabs-nav-sticky-wrap{position:static;background:transparent;border-bottom:none;box-shadow:none}}
+:root:not([data-theme="light"]) .tabs-nav-sticky-wrap{background:var(--surface)}
+:root[data-theme="dark"] .tabs-nav-sticky-wrap{background:var(--surface)}
+/* Improvement 1 – results empty state */
+.results-empty-state{position:absolute;inset:0;z-index:10;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;padding:40px 24px;pointer-events:none;opacity:1;transition:opacity 0.4s ease}
+.results-empty-state.hidden{opacity:0;pointer-events:none}
+.res-es-icon{font-size:3rem;line-height:1}
+.res-es-title{font-family:'IBM Plex Mono',monospace;font-size:18px;font-weight:700;color:#13213A;text-align:center;letter-spacing:-0.02em}
+.res-es-sub{font-size:13px;color:#64748b;text-align:center;max-width:280px;line-height:1.5}
+.res-es-arrow{font-size:1.5rem;animation:esBounce 1.4s ease-in-out infinite}
+@keyframes esBounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+.results{position:relative;min-height:260px}
+.scroll-top-btn{position:fixed;bottom:100px;right:28px;z-index:998;width:40px;height:40px;border-radius:50%;background:#13213A;color:#fff;border:none;cursor:pointer;font-size:18px;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 16px rgba(19,33,58,0.3);opacity:0;transform:translateY(16px);transition:opacity 0.3s,transform 0.3s,background 0.2s;pointer-events:none}
 .scroll-top-btn.vis{opacity:1;transform:none;pointer-events:auto}
 .scroll-top-btn:hover{background:#EE5A33}
 
@@ -1419,7 +1471,7 @@ body{font-family:'IBM Plex Mono',ui-monospace,monospace!important}
           <select id="dest-select" onchange="updateBoardingPass()"></select>
         </label>
         <label class="hero-form-field">
-          <span>Departure <small style="font-weight:400">(optional)</small></span>
+          <span>Departure <small style="font-weight:400;color:#EE5A33">→ Planner</small></span>
           <input type="date" id="trip-date" onchange="setTripDate&&setTripDate(this.value)">
         </label>
         <button type="button" class="hero-plan-btn" onclick="planTrip()">
@@ -1485,6 +1537,12 @@ body{font-family:'IBM Plex Mono',ui-monospace,monospace!important}
   <!-- RESULTS (hidden until planTrip()) -->
   <div class="results" id="results">
     <!-- Boarding pass chrome -->
+    <div class="results-empty-state" id="results-empty-state">
+      <div class="res-es-icon">✈️</div>
+      <div class="res-es-title">Where are you headed?</div>
+      <div class="res-es-sub">Select your passport and destination above to see visa requirements, travel tips, and more.</div>
+      <div class="res-es-arrow">↑</div>
+    </div>
     <div class="result-chrome-wrap">
       <!-- Header -->
       <div class="result-banner">
@@ -1518,16 +1576,16 @@ body{font-family:'IBM Plex Mono',ui-monospace,monospace!important}
         <div class="result-sep-notch-r"></div>
       </div>
       <!-- Tabs strip -->
-      <div class="tabs-nav">
-        <button class="tab-btn active" onclick="switchTab('visa',this)"><span class="tab-icon">🛂</span> Visa</button>
-        <button class="tab-btn" onclick="switchTab('reach',this)"><span class="tab-icon">✈️</span> Getting There</button>
-        <button class="tab-btn" onclick="switchTab('around',this)"><span class="tab-icon">🚆</span> Getting Around</button>
-        <button class="tab-btn" onclick="switchTab('connect',this)"><span class="tab-icon">📱</span> Stay Connected</button>
-        <button class="tab-btn" onclick="switchTab('plan',this)"><span class="tab-icon">📅</span> Trip Planner</button>
-        <button class="tab-btn" onclick="switchTab('food',this)"><span class="tab-icon">🍽️</span> Food &amp; Culture</button>
-        <button class="tab-btn" onclick="switchTab('reviews',this)"><span class="tab-icon">⭐</span> Reviews</button>
-        <button class="tab-btn" onclick="switchTab('map',this)"><span class="tab-icon">📍</span> Map</button>
-      </div>
+      <div class="tabs-nav-sticky-wrap"><div class="tabs-nav">
+        <button class="tab-btn active" onclick="switchTab('visa',this)"><svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg> Visa</button>
+        <button class="tab-btn" onclick="switchTab('reach',this)"><svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.8 19.2 16 11l3.5-3.5C21 6 21.5 4 21 3c-1-.5-3 0-4.5 1.5L13 8 4.8 6.2c-.5-.1-.9.1-1.1.5l-.3.5c-.2.5-.1 1 .3 1.3L9 12l-2 3H4l-1 1 3 2 2 3 1-1v-3l3-2z"/></svg> Getting There</button>
+        <button class="tab-btn" onclick="switchTab('around',this)"><svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg> Getting Around</button>
+        <button class="tab-btn" onclick="switchTab('connect',this)"><svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12" y2="18"/></svg> Stay Connected</button>
+        <button class="tab-btn" onclick="switchTab('plan',this)"><svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg> Trip Planner</button>
+        <button class="tab-btn" onclick="switchTab('food',this)"><svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2"/><line x1="7" y1="2" x2="7" y2="11"/><path d="M21 15V2a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h2a2 2 0 0 1 2 2v2a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-2"/></svg> Food &amp; Culture</button>
+        <button class="tab-btn" onclick="switchTab('reviews',this)"><svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg> Reviews</button>
+        <button class="tab-btn" onclick="switchTab('map',this)"><svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Map</button>
+      </div></div><!-- /tabs-nav /tabs-nav-sticky-wrap -->
     </div><!-- /result-chrome-wrap -->
     <div id="trip-card" hidden></div>
     <!-- Tab panels -->
@@ -1599,7 +1657,7 @@ body{font-family:'IBM Plex Mono',ui-monospace,monospace!important}
     </div>
     <div class="footer-links-col">
       <h4>Destinations</h4>
-      <div id="footer-dests"></div>
+      <div id="footer-dests"><span class="footer-dest-skel"></span><span class="footer-dest-skel" style="width:55px"></span><span class="footer-dest-skel" style="width:80px"></span><span class="footer-dest-skel" style="width:60px"></span></div>
     </div>
   </div>
   <div class="footer-bottom">© 2026 TravelEasy &nbsp;·&nbsp; Made with ❤️ for travelers worldwide</div>
@@ -2883,6 +2941,10 @@ function getVisaData(passportCode, destCode) {
 }
 
 function planTrip(scroll = true) {
+  // Improvement 3: hide empty state
+  var es = document.getElementById('results-empty-state');
+  if(es) es.classList.add('hidden');
+
   const passportCode = document.getElementById('passport-select').value;
   const destCode = document.getElementById('dest-select').value;
   const dest = DB[destCode];
@@ -2924,6 +2986,12 @@ function planTrip(scroll = true) {
   const r = document.getElementById('results');
   r.classList.add('show');
   if (scroll) r.scrollIntoView({behavior:'smooth',block:'start'});
+  // Improvement 3: pulse stat cards on load
+  setTimeout(function(){
+    document.querySelectorAll('.result-chrome-wrap .stat-card').forEach(function(c){
+      c.classList.remove('stat-pulse'); void c.offsetWidth; c.classList.add('stat-pulse');
+    });
+  }, 450);
 
   // Update Aria context
   ariaUpdateContext();
@@ -7287,9 +7355,22 @@ function renderCompare() {
   };
   const A = col(a), B = col(b);
   const rows = [['Entry','entry'],['Visa fee','fee'],['Processing','proc'],['Max stay','stay'],['Flight time','flight'],['Mid-range budget','budget'],['Best months','best'],['Power plug','plug'],['Emergency','emergency'],['Restaurant tips','tip']];
+  // Improvement 9: color-coded comparison badges
+  const numericCols = new Set(['fee','stay','proc','flight','budget']);
+  function extractNum(s) { const m=String(s).match(/\d[\d,]*/); return m?parseFloat(m[0].replace(/,/g,'')):null; }
+  function cmpCell(k, va, vb, isA) {
+    const na=extractNum(va), nb=extractNum(vb);
+    const fewerIsBetter=new Set(['fee','proc','flight']);
+    if(na===null||nb===null||na===nb) return va;
+    const aWins = fewerIsBetter.has(k) ? na<nb : na>nb;
+    const win = isA ? aWins : !aWins;
+    return win
+      ? `<span class="cmp-win">${va}</span><span class="cmp-win-badge">better</span>`
+      : `<span class="cmp-lose">${va}</span>`;
+  }
   out.innerHTML = `<div class="cmp-scroll"><table class="cmp-table">
       <thead><tr><th scope="col"><span class="sr">Detail</span></th><th scope="col">${A.name}</th><th scope="col">${B.name}</th></tr></thead>
-      <tbody>${rows.map(([l, k]) => `<tr><th scope="row">${l}</th><td>${A[k]}</td><td>${B[k]}</td></tr>`).join('')}</tbody>
+      <tbody>${rows.map(([l, k]) => `<tr><th scope="row">${l}</th><td>${numericCols.has(k)?cmpCell(k,A[k],B[k],true):A[k]}</td><td>${numericCols.has(k)?cmpCell(k,B[k],A[k],false):B[k]}</td></tr>`).join('')}</tbody>
     </table></div>
     <div class="tool-note">Visa details for a ${pass ? pass.n : p} passport. Change your passport in the form at the top of the page.</div>`;
 }
